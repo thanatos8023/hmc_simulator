@@ -35,10 +35,10 @@ app.get('/view', function(req, res) {
 	conn_db.query(sql_input, function(err, user_inputs, body) {
 		var sql_output = "SELECT * from TB_RESPONSE"
 		conn_db.query(sql_output, function(err, response_utt, body) {
-			console.log("Intention: " + user_inputs.intention);
-			console.log("User Utterance: " + user_inputs.utterance);
+			console.log("Intention: " + user_inputs[0].intention);
+			console.log("User Utterance: " + user_inputs[0].utterance);
 
-			console.log("Response Message: " + response_utt.response_message);
+			console.log("Response Message: " + response_utt[0].response_message);
 		});
 	});
 	res.render('view');
