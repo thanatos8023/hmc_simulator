@@ -31,9 +31,19 @@ app.listen(23705, function(){
 
 // View page
 app.get('/view', function(req, res) {
-	var sql1 = "SELECT * from TB_USER_UTTERANCE"
-	conn_db.query(sql1, function(err, user_inputs, body) {
-		console.log(user_inputs);
+	var sql_input = "SELECT * from TB_USER_UTTERANCE"
+	conn_db.query(sql_input, function(err, user_inputs, body) {
+		var sql_output = "SELECT * from TB_RESPONSE"
+		conn_db.query(spl.output, function(err, response_utt, body) {
+			console.log(user_inputs);
+			console.log(response_utt);
+		});
 	});
 	res.render('view')
 });
+
+// Modify page
+app.get('/mode', function(req, res) {
+	var view_sql = "SELECT * from TB_USER_UTTERANCE"
+	conn_db.query(view_sql, function)
+})
