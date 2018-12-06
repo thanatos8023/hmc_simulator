@@ -31,7 +31,7 @@ app.listen(23705, function(){
 
 // View page
 app.get('/view', function(req, res) {
-	var sql1 = "SELECT * from TB_USER_INPUT"
+	var sql1 = "SELECT * from TB_USER_UTTERANCE"
 	conn_db.query(sql1, function(err, user_inputs, body) {
 		console.log(user_inputs);
 	});
