@@ -39,11 +39,13 @@ app.get('/view', function(req, res) {
 			console.log(response_utt);
 		});
 	});
-	res.render('view')
+	res.render('view');
 });
 
 // Modify page
 app.get('/mode', function(req, res) {
 	var view_sql = "SELECT * from TB_USER_UTTERANCE"
-	conn_db.query(view_sql, function)
-})
+	conn_db.query(view_sql, function(err, user_inputs, body) {
+		console.log("Hello");
+	});
+});
