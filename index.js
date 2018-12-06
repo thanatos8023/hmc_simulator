@@ -34,7 +34,7 @@ app.get('/view', function(req, res) {
 	var sql_input = "SELECT * from TB_USER_UTTERANCE"
 	conn_db.query(sql_input, function(err, user_inputs, body) {
 		var sql_output = "SELECT * from TB_RESPONSE"
-		conn_db.query(spl_output, function(err, response_utt, body) {
+		conn_db.query(sql_output, function(err, response_utt, body) {
 			console.log(user_inputs);
 			console.log(response_utt);
 		});
