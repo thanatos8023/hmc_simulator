@@ -83,10 +83,14 @@ app.post('/input', function(req, res) {
 
 // Delete Utterance in DB
 app.post('/delete', function(req, res) {
-	var id = req.body.checked
+	var checked_utt = req.body.checked_utt
 
 	console.log("%%% Server log: /delete ROUTER");
-	console.log("ID: " + id);
+	console.log("Checked Utterance: " + checked_utt);
 
-	res.redirect('/mode');
+	var sql = "DELETE FROM tb_utterance_manage WHERE user_input=?"
+	conn_db.query(sql, [checked_utt], function(err, result, body) {
+		console.log("%%% Server log: /delete ROUTER :: Successfully delete [" + checked_utt + "] in DB.");
+		res.redirect('/mode');
+	});
 });
