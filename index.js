@@ -32,7 +32,7 @@ app.listen(23705, function(){
 // Monitoring page
 app.get('/view', function(req, res) {
 	var sql = "SELECT * FROM tb_monitoring"
-	conn_db.query(sql_input, function(err, monit_info, body) {
+	conn_db.query(sql, function(err, monit_info, body) {
 		console.log("User ID: " + monit_info[0].user_id);
 		console.log("Car Type: " + monit_info[0].car_type);
 		console.log("Bluelink_status: " + monit_info[0].bluelink_status);
@@ -47,7 +47,7 @@ app.get('/view', function(req, res) {
 // Modify page
 app.get('/mode', function(req, res) {
 	var sql = "SELECT * FROM tb_utterance_manage"
-	conn_db.query(sql_input, function(err, manage_table, body) {
+	conn_db.query(sql, function(err, manage_table, body) {
 		console.log("Intention: " + manage_table[0].intention);
 		console.log("User Input: " + manage_table[0].user_input);
 		console.log("Response text: " + manage_table[0].response_text);
