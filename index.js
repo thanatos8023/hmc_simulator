@@ -58,7 +58,7 @@ app.get('/mode', function(req, res) {
 });
 
 // Input Utterance in DB
-app.get('/input', function(req, res) {
+app.post('/input', function(req, res) {
 	var intention = req.body.selectedIntention;
 	var new_userInput = req.body.new_userInput;
 	var new_responseText = req.body.new_responseText;
