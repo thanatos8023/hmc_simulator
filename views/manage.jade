@@ -8,16 +8,19 @@ html
 		form(action='/delete' method='post')
 			div
 				h2 Manage Input & Output
-				input(type='submit' text='삭제')
+				input(type='submit' value='삭제')
 			div
 				table
 					th
+						td
 						td Intention
 						td User Input
 						td Response Text
 						td Chatbot status
 					each row in manage_table
 						tr
+							td
+								input(type="checkbox" name=row.user_input value=row.user_input)
 							td= row.intention
 							td= row.user_input
 							td= row.response_text
@@ -36,3 +39,5 @@ html
 					td
 						label Response Text
 						input(type="text" placeholder=manage_table[0].response_text)
+					td
+						input(type="submit" value="추가")
