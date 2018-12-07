@@ -51,12 +51,12 @@ app.get('/mode', function(req, res) {
 		console.log('%%% Server log: /mode ROUTER');
 
 		console.log("Intention: " + manage_table[0].intention);
+		console.log("ID Number: " + manage_table[0].id_number);
 		console.log("User Input: " + manage_table[0].user_input);
 		console.log("Response text: " + manage_table[0].response_text);
 		console.log("chatbot_status: " + manage_table[0].chatbot_status);
-		console.log("Message ID: " + manage_table[0].id);
 
-		res.render('manage', {manage_table: manage_table, nrows: manage_table.length});
+		res.render('manage', {manage_table: manage_table});
 	});
 });
 
@@ -83,5 +83,10 @@ app.post('/input', function(req, res) {
 
 // Delete Utterance in DB
 app.post('/delete', function(req, res) {
+	var id = req.body.checked
 
+	console.log("%%% Server log: /delete ROUTER");
+	console.log("ID: " + id);
+
+	res.redirect('/mode');
 });

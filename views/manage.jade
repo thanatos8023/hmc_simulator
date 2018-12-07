@@ -17,14 +17,14 @@ html
 						td User Input
 						td Response Text
 						td Chatbot status
-					-for (var i=0; i<nrows; i++)
+					each row in manage_table
 						tr
 							td
-								input(type="checkbox" name=i value=manage_table[i].user_input)
-							td= manage_table[i].intention
-							td= manage_table[i].user_input
-							td= manage_table[i].response_text
-							td= manage_table[i].chatbot_status
+								input(type="checkbox" name="checked" value=row.user_input)
+							td= row.intention
+							td= row.user_input
+							td= row.response_text
+							td= row.chatbot_status
 		div
 			form(action='/input' method='post')
 				tr
