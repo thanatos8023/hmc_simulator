@@ -29,27 +29,30 @@ app.listen(23705, function(){
 	console.log('Connected, 23705 port!');
 });
 
-// View page
+// Monitoring page
 app.get('/view', function(req, res) {
-	// Need 2 queries, because 2 tables
-	var sql_input = "SELECT * from TB_USER_UTTERANCE"
-	conn_db.query(sql_input, function(err, user_inputs, body) {
-		var sql_output = "SELECT * from TB_RESPONSE"
-		conn_db.query(sql_output, function(err, response_utt, body) {
-			console.log("Intention: " + user_inputs[0].intention);
-			console.log("User Utterance: " + user_inputs[0].utterance);
+	var sql = "SELECT * FROM tb_monitoring"
+	conn_db.query(sql_input, function(err, monit_info, body) {
+		console.log("User ID: " + monit_info[0].user_id);
+		console.log("Car Type: " + monit_info[0].car_type);
+		console.log("Bluelink_status: " + monit_info[0].bluelink_status);
+		console.log("Intention: " + monit_info[0].intention);
+		console.log("User input: " + monit_info[0].user_input);
+		console.log("Response text: " + monit_info[0].response_text);
 
-			console.log("Response Message: " + response_utt[0].response_message);
-
-			res.render('view', {user_inputs: user_inputs, response_utt: response_utt, nrows: user_inputs.length});
-		});
+		res.render('view', {monit_info: monit_info});
 	});
 });
 
 // Modify page
 app.get('/mode', function(req, res) {
-	var view_sql = "SELECT * from TB_USER_UTTERANCE"
-	conn_db.query(view_sql, function(err, user_inputs, body) {
-		console.log("Hello");
+	var sql = "SELECT * FROM tb_utterance_manage"
+	conn_db.query(sql_input, function(err, manage_table, body) {
+		console.log("Intention: " + manage_table[0].intention);
+		console.log("User Input: " + manage_table[0].user_input);
+		console.log("Response text: " + manage_table[0].response_text);
+		console.log("chatbot_status: " + manage_table[0].chatbot_status);
+
+		res.render('manage', {manage_table: manage_table});
 	});
 });

@@ -4,23 +4,21 @@ html
 		meta(charset='utf-8')
 		title User utterance and response viewer
 	body
-		h1 Charbot Simulator
-		div
-			form
-				label User ID
-				input(type="text" placeholder="카카오톡 송출 ID")
-				label Car
-				input(type="text" placeholder="차종 입력")
-				lebel Status
-				input(type="text" placeholder="차량 상태 정보 표시")
-		div
-			h2 Monitoring
-			table
-				th
-					td Intention
-					td User Input
-					td Response
-				each user_input in user_inputs
-					tr
-						td= user_input.intention
-						td= user_input.user
+		h1 Chatbot Simulator
+		h2 Monitoring
+		table
+			th
+				td User ID
+				td Car Type
+				td Bluelink Status
+				td Intention
+				td User Input
+				td Response Text
+			each info in monit_info
+				tr
+					td= info.user_id
+					td= info.car_type
+					td= info.bluelink_status
+					td= info.intention
+					td= info.user_input
+					td= info.response_text

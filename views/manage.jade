@@ -1,0 +1,38 @@
+doctype html
+html
+	head
+		meta(charset='utf-8')
+		title User utterance and response viewer
+	body
+		h1 Chatbot Simulator
+		form(action='/delete' method='post')
+			div
+				h2 Manage Input & Output
+				input(type='submit' text='삭제')
+			div
+				table
+					th
+						td Intention
+						td User Input
+						td Response Text
+						td Chatbot status
+					each row in manage_table
+						tr
+							td= row.intention
+							td= row.user_input
+							td= row.response_text
+							td= row.chatbot_status
+		div
+			form(action='/input')
+				tr
+					td
+						label Intention
+						select
+							option(value="control_engine_start") Control Engine Start
+							opeion(value="control_engine_stop") Control Engine Stop
+					td
+						label User Input
+						input(type="text")
+					td
+						label Response Text
+						input(type="text" placeholder=manage_table[0].response_text)
