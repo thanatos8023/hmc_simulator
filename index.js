@@ -53,6 +53,20 @@ app.get('/mode', function(req, res) {
 		console.log("Response text: " + manage_table[0].response_text);
 		console.log("chatbot_status: " + manage_table[0].chatbot_status);
 
-		res.render('manage', {manage_table: manage_table});
+		res.render('manage', {manage_table: manage_table, nrows: manage_table.length});
 	});
+});
+
+// Input Utterance in DB
+app.get('/input', function(req, res) {
+	var intention = req.body.selectedIntention;
+	var new_userInput = req.body.new_userInput;
+	var new_responseText = req.body.new_responseText;
+
+	console.log("%%% Server log: /input ROUTER");
+	console.log("Intention: " + intention);
+	console.log("New Input: " + new_userInput);
+	console.log("New Response: " + new_responseText);
+
+	res.redirect('/mode')
 });
