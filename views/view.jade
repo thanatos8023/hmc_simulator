@@ -2,8 +2,25 @@ doctype html
 html
 	head
 		meta(charset='utf-8')
+		title User utterance and response viewer
 	body
-		h1 Hello Jade
-		ul
-			-for (var i=0; i<5; i++)
-				li coding
+		h1 Charbot Simulator
+		div
+			form
+				label User ID
+				input(type="text" placeholder="카카오톡 송출 ID")
+				label Car
+				input(type="text" placeholder="차종 입력")
+				lebel Status
+				input(type="text" placeholder="차량 상태 정보 표시")
+		div
+			h2 Monitoring
+			table
+				tr
+					td 1,1
+					td 1,2
+					td 1,3
+				tr
+					td 2,1
+					td 2,2
+					td 2,3

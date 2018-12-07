@@ -31,6 +31,7 @@ app.listen(23705, function(){
 
 // View page
 app.get('/view', function(req, res) {
+	// Need 2 queries, because 2 tables
 	var sql_input = "SELECT * from TB_USER_UTTERANCE"
 	conn_db.query(sql_input, function(err, user_inputs, body) {
 		var sql_output = "SELECT * from TB_RESPONSE"
