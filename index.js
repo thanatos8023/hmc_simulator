@@ -42,7 +42,7 @@ app.get('/view', function(req, res) {
 			console.log("Response Message: " + response_utt[0].response_message);
 		});
 	});
-	res.render('view');
+	res.render('view', {user_inputs: user_inputs, response_utt: response_utt, nrows: user_inputs.length});
 });
 
 // Modify page
