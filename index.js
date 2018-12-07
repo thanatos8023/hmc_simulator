@@ -73,7 +73,7 @@ app.post('/input', function(req, res) {
 	console.log("New Status: " + new_chatbotStatus);
 
 	var sql = 'INSERT INTO tb_utterance_manage (intention, user_input, response_text, chatbot_status) VALUES(?, ?, ?, ?)';
-	conn.query(sql, [intention, new_userInput, new_responseText, new_chatbotStatus], function(err, result, fields){
+	conn_db.query(sql, [intention, new_userInput, new_responseText, new_chatbotStatus], function(err, result, fields){
 		console.log("%%% Server log: New information Successfully added in DB.");
 		res.redirect('/mode')
 	});
