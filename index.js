@@ -54,6 +54,7 @@ app.get('/mode', function(req, res) {
 		console.log("User Input: " + manage_table[0].user_input);
 		console.log("Response text: " + manage_table[0].response_text);
 		console.log("chatbot_status: " + manage_table[0].chatbot_status);
+		console.log("Message ID: " + manage_table[0].id);
 
 		res.render('manage', {manage_table: manage_table, nrows: manage_table.length});
 	});
@@ -77,4 +78,10 @@ app.post('/input', function(req, res) {
 		console.log("%%% Server log: New information Successfully added in DB.");
 		res.redirect('/mode')
 	});
+});
+
+
+// Delete Utterance in DB
+app.post('/delete', function(req, res) {
+
 });
