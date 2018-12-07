@@ -40,9 +40,10 @@ app.get('/view', function(req, res) {
 			console.log("User Utterance: " + user_inputs[0].utterance);
 
 			console.log("Response Message: " + response_utt[0].response_message);
+
+			res.render('view', {user_inputs: user_inputs, response_utt: response_utt, nrows: user_inputs.length});
 		});
 	});
-	res.render('view', {user_inputs: user_inputs, response_utt: response_utt, nrows: user_inputs.length});
 });
 
 // Modify page
