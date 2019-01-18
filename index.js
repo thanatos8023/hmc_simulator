@@ -65,8 +65,7 @@ app.get('/mode', function(req, res) {
 		// 도메인 목록만 제시함 
 		var domainList = [];
 		for (var i = 0; i < ilResult.length; i++) {
-			console.log(ilResult[i].domain);
-			if (domainList.find(ilResult[i].domain) < 0) { // 처음 보는 도메인인 경우
+			if (domainList.indexOf(ilResult[i].domain) < 0) { // 처음 보는 도메인인 경우
 				domainList.push(ilResult[i].domain);
 			}
 		}
