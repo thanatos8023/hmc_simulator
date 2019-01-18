@@ -45,28 +45,6 @@ app.get('/view', function(req, res) {
 });
 
 // Modify page
-app.get('/home', function (req, res) {
-	// 드롭다운 메뉴를 위해서 목록을 만들어야함 
-	var ilSQL = "SELECT * FROM tb_response_text";
-	conn_db.query(ilSQL, function (ilError, ilResult, ilBody) {
-		if (ilError) {
-			console.error("SERVER :: DB Connection : tb_user_input connection error");
-			console.error(ilError);
-			res.end();
-			return ilError
-		}
-
-		// 도메인 목록만 제시함 
-		var domainList = [];
-		for (var i = 0; i < ilResult.length; i++) {
-			if (domainList.indexOf(ilResult[i].domain) < 0) { // 처음 보는 도메인인 경우
-				domainList.push(ilResult[i].domain);
-			}
-		}
-
-		res.render('manage', {domainList: domainList})
-	});
-});
 
 app.get('/mode', function(req, res) {
 	console.log('%%% Server log: /mode ROUTER');
@@ -94,6 +72,9 @@ app.get('/mode', function(req, res) {
 		}
 
 		// 도메인이 선택되면 나머지 정보들이 발생
+		if (!domain || !intention || !status) { // 하나라도 없으면 기본 페이지
+			res.render('home', {domainList: domainList});
+		}
 
 		// 사용자 입력 목록 
 		var inputSQL = "SELECT * FROM tb_user_input WHERE domain = ? AND intention = ? AND chatbot_status = ?"

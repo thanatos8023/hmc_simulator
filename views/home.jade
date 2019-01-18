@@ -1,0 +1,28 @@
+doctype html
+html
+	head
+		meta(charset='utf-8')
+		title User utterance and response viewer
+		style table, th, td {border: 1px solid black;}
+		script.
+			
+	body
+		h1 Chatbot Simulator
+		div
+			form(action='/mode' method='get')
+				tr
+					td
+						label Domain
+						select(name="selectedDomain" id="selectedDomain")
+							each domain in domainList
+								option(value=domain) domain
+					td
+						label Intention
+						select(name="selectedDomain" id="selectedDomain")
+							each row in inputResult
+								option(value=row.domain) row.domain
+					td
+						label Status
+						select(name="selectedStatus" id="selectedStatus")
+							each row in inputResult
+								option(value=row.domain) row.domain
