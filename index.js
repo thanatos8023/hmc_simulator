@@ -55,11 +55,11 @@ app.get('/mode', function(req, res) {
 	// 드롭다운 메뉴를 위해서 목록을 만들어야함 
 	var ilSQL = "SELECT * FROM tb_response_text";
 	conn_db.query(ilSQL, function (ilError, ilResult, ilBody) {
-		if (ilErr) {
+		if (ilError) {
 			console.error("SERVER :: DB Connection : tb_user_input connection error");
-			console.error(ilErr);
+			console.error(ilError);
 			res.end();
-			return ilErr
+			return ilError
 		}
 
 		// 도메인 목록만 제시함 
