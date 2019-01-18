@@ -4,8 +4,7 @@ html
 		meta(charset='utf-8')
 		title User utterance and response viewer
 		style table, th, td {border: 1px solid black;}
-		script.
-
+		script
 	body
 		h1 Chatbot Simulator
 		div
@@ -15,4 +14,4 @@ html
 						label Domain
 						select(name="selectedDomain" id="selectedDomain")
 							each domain in domainList
-								option(value=domain) domain
+								option(value=#{domain}) #{domain}
