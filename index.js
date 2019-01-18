@@ -64,18 +64,18 @@ app.get('/mode', function(req, res) {
 		}
 
 		// 도메인 목록만 제시함 
-		var domainList = [];
+		var dl = [];
 		for (var i = 0; i < ilResult.length; i++) {
-			if (domainList.indexOf(ilResult[i].domain) < 0) { // 처음 보는 도메인인 경우
+			if (dl.indexOf(ilResult[i].domain) < 0) { // 처음 보는 도메인인 경우
 				console.log(ilResult[i].domain);
-				domainList.push(ilResult[i].domain);
+				dl.push(ilResult[i].domain);
 			}
 		}
 
 
 		// 도메인이 선택되면 나머지 정보들이 발생
 		if (!domain || !intention || !status) { // 하나라도 없으면 기본 페이지
-			res.render('home', {domainList: domainList});
+			res.render('home', {domainList: dl, intentionList: [], statusList, []});
 		} else {
 			// 사용자 입력 목록 
 			var inputSQL = "SELECT * FROM tb_user_input WHERE domain = ? AND intention = ? AND chatbot_status = ?"
