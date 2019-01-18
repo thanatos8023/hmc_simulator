@@ -63,8 +63,9 @@ app.get('/home', function (req, res) {
 				domainList.push(ilResult[i].domain);
 			}
 		}
+
+		res.render('manage', {domainList: domainList})
 	});
-	res.render('manage', {domainList: domainList})
 });
 
 app.get('/mode', function(req, res) {
