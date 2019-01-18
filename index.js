@@ -71,31 +71,34 @@ app.get('/mode', function(req, res) {
 			}
 		}
 
+
 		// 도메인이 선택되면 나머지 정보들이 발생
 		if (!domain || !intention || !status) { // 하나라도 없으면 기본 페이지
 			res.render('home', {domainList: domainList});
+		} else {
+			// 사용자 입력 목록 
+			var inputSQL = "SELECT * FROM tb_user_input WHERE domain = ? AND intention = ? AND chatbot_status = ?"
+			conn_db.query(inputSQL, [domain, intention, status], function(inErr, inResult, inBody) {
+				if (inErr) {
+					console.error("SERVER :: DB Connection : tb_user_input connection error");
+					console.error(inErr);
+					res.end();
+					return inErr
+				}
+				
+				console.log('%%% Server log: User input confirm');
+				console.log("Domain: " + inResult[0].domain);
+				console.log("Intention: " + inResult[0].intention);
+				console.log("User Input: " + inResult[0].user_input);
+				
+				//var resSQL = "SELECT * FROM tb_response_text WHERE domain = ? AND intention = ? AND chatbot_status = ?"
+
+
+				res.render('manage', {inputResult: inResult, domainList: domainList});
+			});
 		}
 
-		// 사용자 입력 목록 
-		var inputSQL = "SELECT * FROM tb_user_input WHERE domain = ? AND intention = ? AND chatbot_status = ?"
-		conn_db.query(inputSQL, [domain, intention, status], function(inErr, inResult, inBody) {
-			if (inErr) {
-				console.error("SERVER :: DB Connection : tb_user_input connection error");
-				console.error(inErr);
-				res.end();
-				return inErr
-			}
-			
-			console.log('%%% Server log: User input confirm');
-			console.log("Domain: " + inResult[0].domain);
-			console.log("Intention: " + inResult[0].intention);
-			console.log("User Input: " + inResult[0].user_input);
-			
-			//var resSQL = "SELECT * FROM tb_response_text WHERE domain = ? AND intention = ? AND chatbot_status = ?"
-
-
-			res.render('manage', {inputResult: inResult, domainList: domainList});
-		});
+		
 	});
 });
 
