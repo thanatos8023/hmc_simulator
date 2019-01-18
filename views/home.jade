@@ -14,14 +14,14 @@ html
 						label Domain
 						select(name="selectedDomain" id="selectedDomain")
 							each domain in domainList
-								option(value=domain) domain
+								option(value=domain)= domain
 					td
 						label Intention
 						select(name="selectedIntention" id="selectedIntention")
 							each intention in intentionList
-								option(value=intention) intention
+								option(value=intention)= intention
 					td
 						label Status
 						select(name="selectedStatus" id="selectedStatus")
 							each status in statusList
-								option(value=status) status
+								option(value=status)= status
