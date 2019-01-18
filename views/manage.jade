@@ -6,41 +6,54 @@ html
 		style table, th, td {border: 1px solid black;}
 	body
 		h1 Chatbot Simulator
-		form(action='/delete' method='post')
-			div
-				h2 Manage Input & Output
-				input(type='submit' value='삭제')
-			div
-				table
-					th
-						td Intention
-						td User Input
-						td Response Text
-						td Chatbot status
-					each row in manage_table
-						tr
-							td
-								input(type="checkbox" name="checked_utt" value=row.user_input)
-							td= row.intention
-							td= row.user_input
-							td= row.response_text
-							td= row.chatbot_status
+		div
+			form(action='/mode' method='get')
+				tr
+					td
+						label Domain
+						select(name="selectedDomain" id="selectedDomain")
+							each domain in domainList
+								option(value=domain) domain
+					td
+						label Intention
+						select(name="selectedDomain" id="selectedDomain")
+							each row in inputResult
+								option(value=row.domain) row.domain
+					td
+						label Status
+						select(name="selectedStatus" id="selectedStatus")
+							each row in inputResult
+								option(value=row.domain) row.domain
+					td
+						input(type="submit" value="보기")
+		div
+			form(action='/delete' method='post')
+				div
+					h2 Manage Input & Output
+					input(type='submit' value='삭제')
+				div
+					table
+						th
+							td Domain
+							td Intention
+							td User Input
+						each row in inputResult
+							tr
+								td
+									input(type="checkbox" name="checked_utt" value=row.user_input)
+								td= row.domain
+								td= row.intention
+								td= row.user_input
 		div
 			form(action='/input' method='post')
 				tr
 					td
-						label Intention
-						select(name="selectedIntention" id="selectedIntention")
-							option(value="control_engine_start") Control Engine Start
-							option(value="control_engine_stop") Control Engine Stop
-					td
 						label User Input
-						input(type="text" name="new_userInput")
-					td
-						label Response Text
-						input(type="text" name="new_responseText")
-					td
-						label Chatbot Status
-						input(type="text" name="new_chatbotStatus")
+						input(type="text" name="newUserInput")
 					td
 						input(type="submit" value="추가")
+		div
+			form(action='/input' method='post')
+				tr
+					td
+						label

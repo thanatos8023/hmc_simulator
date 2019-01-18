@@ -7,7 +7,7 @@ const app = express();
 const mysql = require('mysql');
 const conn_db = mysql.createConnection({
   host     : 'localhost',
-  user     : 'spp',
+  user     : 'hmc',
   password : 'aleldjwps',
   database : 'hmc_chatbot'
 });
@@ -46,17 +46,54 @@ app.get('/view', function(req, res) {
 
 // Modify page
 app.get('/mode', function(req, res) {
-	var sql = "SELECT * FROM tb_utterance_manage"
-	conn_db.query(sql, function(err, manage_table, body) {
-		console.log('%%% Server log: /mode ROUTER');
+	console.log('%%% Server log: /mode ROUTER');
 
-		console.log("Intention: " + manage_table[0].intention);
-		console.log("ID Number: " + manage_table[0].id_number);
-		console.log("User Input: " + manage_table[0].user_input);
-		console.log("Response text: " + manage_table[0].response_text);
-		console.log("chatbot_status: " + manage_table[0].chatbot_status);
+	var domain = req.query.selectedDomain;
+	var intention = req.query.selectedIntention;
+	var status = req.query.selectedStatus;
 
-		res.render('manage', {manage_table: manage_table});
+	// 드롭다운 메뉴를 위해서 목록을 만들어야함 
+	var ilSQL = "SELECT * FROM tb_response_text";
+	conn_db.query(ilSQL, function (ilError, ilResult, ilBody) {
+		if (ilErr) {
+			console.error("SERVER :: DB Connection : tb_user_input connection error");
+			console.error(ilErr);
+			res.end();
+			return ilErr
+		}
+
+		// 도메인 목록만 제시함 
+		var domainList = [];
+		for (var i = 0; i < ilResult.length; i++) {
+			if (domainList.find(ilResult[i].domain) < 0) { // 처음 보는 도메인인 경우
+				domainList.push({
+					ilResult[i].domain:
+				});
+			}
+		}
+
+		// 도메인이 선택되면 나머지 정보들이 발생
+
+		// 사용자 입력 목록 
+		var inputSQL = "SELECT * FROM tb_user_input WHERE domain = ? AND intention = ? AND chatbot_status = ?"
+		conn_db.query(inputSQL, [domain, intention, status], function(inErr, inResult, inBody) {
+			if (inErr) {
+				console.error("SERVER :: DB Connection : tb_user_input connection error");
+				console.error(inErr);
+				res.end();
+				return inErr
+			}
+			
+			console.log('%%% Server log: User input confirm');
+			console.log("Domain: " + inResult[0].domain);
+			console.log("Intention: " + inResult[0].intention);
+			console.log("User Input: " + inResult[0].user_input);
+			
+			//var resSQL = "SELECT * FROM tb_response_text WHERE domain = ? AND intention = ? AND chatbot_status = ?"
+
+
+			res.render('manage', {inputResult: inResult, domainList: domainList});
+		});
 	});
 });
 
@@ -83,12 +120,12 @@ app.post('/input', function(req, res) {
 
 // Delete Utterance in DB
 app.post('/delete', function(req, res) {
-	var checked_utt = req.body.checked_utt
+	var checked_utt = req.body.checked_utt;
 
 	console.log("%%% Server log: /delete ROUTER");
 	console.log("Checked Utterance: " + checked_utt);
 
-	var sql = "DELETE FROM tb_utterance_manage WHERE user_input=?"
+	var sql = "DELETE FROM tb_utterance_manage WHERE user_input=?";
 	conn_db.query(sql, [checked_utt], function(err, result, body) {
 		console.log("%%% Server log: /delete ROUTER :: Successfully delete [" + checked_utt + "] in DB.");
 		res.redirect('/mode');
