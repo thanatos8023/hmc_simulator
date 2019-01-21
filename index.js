@@ -61,16 +61,18 @@ app.get('/mode', function (req, res) {
 			res.end();
 			return allError
 		}
+		console.log("SERVER :: " + allResult.length + " lines detected.");
 
 		var domainList = [];
 		for (var i = 0; i < allResult.length; i++) {
 			if (domainList.indexOf(allResult[i].domain) < -1) {
+				console.log("SERVER :: " + allResult[i].domain + " added to list.");
 				domainList.push(allResult[i].domain);
 			}
 		}
 
 		console.log(domainList);
-		
+
 		res.render('home', {domList: domainList});
 	});
 });
