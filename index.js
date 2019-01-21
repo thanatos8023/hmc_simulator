@@ -45,6 +45,33 @@ app.get('/view', function(req, res) {
 });
 
 // Modify page
+app.get('/mode', function (req, res) {
+	console.log('%%% Server log: /mode ROUTER');
+
+	var domain = req.params.domain;
+	var intention = req.params.intention;
+	var status = req.params.status;
+
+	// 기본적으로 도메인 목록은 무조건 전시해야함 
+	var sql = "SELECT * FROM tb_response_text";
+	conn_db.query(sql, function (allError, allResult, allBody) {
+		if (allError) { // DB 불러오기 에러
+			console.error("SERVER :: DB Connection : All Database reading connection error");
+			console.error(allError);
+			res.end();
+			return allError
+		}
+
+		var domainList = [];
+		for (var i = 0; i < allResult.length; i++) {
+			if (domainList.indexOf(allResult[i].domain) < -1) {
+				domainList.push(allResult[i].domain);
+			}
+		}
+
+		res.render('home', {domList: domainList});
+	});
+});
 
 app.get('/mode/:domain/:intention/:status', function(req, res) {
 	console.log('%%% Server log: /mode ROUTER');
