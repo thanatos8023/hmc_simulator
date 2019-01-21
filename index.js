@@ -69,6 +69,8 @@ app.get('/mode', function (req, res) {
 			}
 		}
 
+		console.log(domainList);
+		
 		res.render('home', {domList: domainList});
 	});
 });
