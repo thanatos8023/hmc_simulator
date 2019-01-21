@@ -46,60 +46,69 @@ app.get('/view', function(req, res) {
 
 // Modify page
 
-app.get('/mode', function(req, res) {
+app.get('/mode/:domain/:intention/status', function(req, res) {
 	console.log('%%% Server log: /mode ROUTER');
 
-	var domain = req.query.selectedDomain;
-	var intention = req.query.selectedIntention;
-	var status = req.query.selectedStatus;
-
-	// 드롭다운 메뉴를 위해서 목록을 만들어야함 
-	var ilSQL = "SELECT * FROM tb_response_text";
-	conn_db.query(ilSQL, function (ilError, ilResult, ilBody) {
-		if (ilError) {
-			console.error("SERVER :: DB Connection : tb_user_input connection error");
-			console.error(ilError);
+	// 기본적으로 도메인 목록은 무조건 전시해야함 
+	var sql = "SELECT * FROM tb_response_text";
+	conn_db.query(sql, function (allError, allResult, allBody) {
+		if (allError) { // DB 불러오기 에러
+			console.error("SERVER :: DB Connection : All Database reading connection error");
+			console.error(allError);
 			res.end();
-			return ilError
+			return allError
 		}
 
-		// 도메인 목록만 제시함 
-		var dl = [];
-		for (var i = 0; i < ilResult.length; i++) {
-			if (dl.indexOf(ilResult[i].domain) < 0) { // 처음 보는 도메인인 경우
-				dl.push(ilResult[i].domain);
+		var domainList = [];
+		for (var i = 0; i < allResult.length; i++) {
+			if (domainList.indexOf(allResult[i].domain) < -1) {
+				domainList.push(allResult[i].domain);
 			}
 		}
 
-		console.log(dl);
-
-		// 도메인이 선택되면 나머지 정보들이 발생
-		if (!domain || !intention || !status) { // 하나라도 없으면 기본 페이지
-			res.render('home', {domainList: dl, intentionList: ['none'], statusList: ['none']});
-		} else {
-			// 사용자 입력 목록 
-			var inputSQL = "SELECT * FROM tb_user_input WHERE domain = ? AND intention = ? AND chatbot_status = ?"
-			conn_db.query(inputSQL, [domain, intention, status], function(inErr, inResult, inBody) {
-				if (inErr) {
-					console.error("SERVER :: DB Connection : tb_user_input connection error");
-					console.error(inErr);
-					res.end();
-					return inErr
+		if (!domain) { // 도메인이 없을 경우
+			// 도메인 목록만 제시
+			res.render(home, {domList: domainList});
+		} else { // 도메인이 있는 경우
+			// 의도 목록은 반드시 필요함 
+			var intentionList = []
+			for (var i = 0; i < allResult.length; i++) {
+				if (intentionList.indexOf(allResult[i].intention) < -1 && allResult[i].domain == domain) { // 도메인이 일치하면서, 목록에 추가되지 않은 의도만 
+					intentionList.push(allResult[i].intention);
 				}
-				
-				console.log('%%% Server log: User input confirm');
-				console.log("Domain: " + inResult[0].domain);
-				console.log("Intention: " + inResult[0].intention);
-				console.log("User Input: " + inResult[0].user_input);
-				
-				//var resSQL = "SELECT * FROM tb_response_text WHERE domain = ? AND intention = ? AND chatbot_status = ?"
+			}
 
+			if (!intention) { //의도가 없는 경우 	
+				// 의도까지만 제시함 
+				res.render(home, {domList: domainList, nowDomain:domain, intList: intentionList});
+			} else { // 의도가 있는 경우 
+				var statusList = []
+				for (var i = 0; i < allResult.length; i++) {
+					if(statusList.indexOf(allResult[i].chatbot_status) < -1 && allResult[i].intention == intention) {
+						statusList.push(allResult[i].chatbot_status);
+					}
+				}
 
-				res.render('manage', {inputResult: inResult, domainList: domainList});
-			});
+				if (!status) { // 상태가 없는 경우 
+					res.render(home, {
+						domList: domainList,
+						nowDomain: domain,
+						intList: intentionList,
+						nowIntention: intention,
+						stList: statusList,
+					});
+				} else { // 상태가 있는 경우
+					res.render(home, {
+						domList: domainList,
+						nowDomain: domain,
+						intList: intentionList,
+						nowIntention: intention,
+						stList: statusList,
+						nowStatus: status
+					});
+				}
+			}
 		}
-
-		
 	});
 });
 

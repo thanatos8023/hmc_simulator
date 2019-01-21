@@ -4,24 +4,18 @@ html
 		meta(charset='utf-8')
 		title User utterance and response viewer
 		style table, th, td {border: 1px solid black;}
-		script
+		script.
+			function setIntentionListByDomain() {
+				var domain = document.getElementById("selectedDomain").value;
+				var intentionList = [];
+				for (var i = 0; i < wholeList.length; i++) {
+				
+				}
+			}
 	body
 		h1 Chatbot Simulator
 		div
-			form(action='/mode' method='get')
-				tr
-					td
-						label Domain
-						select(name="selectedDomain" id="selectedDomain")
-							each domain in domainList
-								option(value=domain)= domain
-					td
-						label Intention
-						select(name="selectedIntention" id="selectedIntention")
-							each intention in intentionList
-								option(value=intention)= intention
-					td
-						label Status
-						select(name="selectedStatus" id="selectedStatus")
-							each status in statusList
-								option(value=status)= status
+			ul
+				each domain in domList
+					li
+						a(href='/mode/'+domain)= domain
