@@ -46,7 +46,7 @@ app.get('/view', function(req, res) {
 
 // Modify page
 
-app.get('/mode/:domain/:intention/status', function(req, res) {
+app.get('/mode/:domain/:intention/:status', function(req, res) {
 	console.log('%%% Server log: /mode ROUTER');
 
 	var domain = req.params.domain;
