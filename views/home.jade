@@ -17,4 +17,5 @@ html
 		div
 			ul
 				each domain in domList
-					li= domain
+					li
+						a(href='/mode/#{domain}')= domain
