@@ -49,6 +49,10 @@ app.get('/view', function(req, res) {
 app.get('/mode/:domain/:intention/status', function(req, res) {
 	console.log('%%% Server log: /mode ROUTER');
 
+	var domain = req.params.domain;
+	var intention = req.params.intention;
+	var status = req.params.status;
+
 	// 기본적으로 도메인 목록은 무조건 전시해야함 
 	var sql = "SELECT * FROM tb_response_text";
 	conn_db.query(sql, function (allError, allResult, allBody) {
