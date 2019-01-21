@@ -24,3 +24,8 @@ html
 								each intention in intList
 									li
 										a(href='/mode/#{domain}/#{intention}')= intention
+										if nowIntention==intention
+											ul
+												each status in stList
+													li
+														a(href='/mode/#{domain}/#{intention}/#status')= status

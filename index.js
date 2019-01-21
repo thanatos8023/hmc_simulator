@@ -95,7 +95,7 @@ app.get('/mode/:domain', function (req, res) {
 		}
 
 		// 의도 목록은 반드시 필요함 
-		var intentionList = []
+		var intentionList = [];
 		for (var i = 0; i < allResult.length; i++) {
 			if (intentionList.indexOf(allResult[i].intention) < 0 && allResult[i].domain == domain) { // 도메인이 일치하면서, 목록에 추가되지 않은 의도만 
 				intentionList.push(allResult[i].intention);
@@ -108,6 +108,56 @@ app.get('/mode/:domain', function (req, res) {
 			domList: domainList,
 			nowDomain: domain,
 			intList: intentionList
+		});
+	});
+});
+
+app.get('/mode/:domain/:intention', function (req, res) {
+	var domain = req.params.domain;
+	var intention = req.params.intention;
+
+	console.log('%%% Server log: /mode/' + domain + '/' + intention + ' ROUTER');
+
+	// 기본적으로 도메인 목록은 무조건 전시해야함 
+	var sql = "SELECT * FROM tb_response_text";
+	conn_db.query(sql, function (allError, allResult, allBody) {
+		if (allError) { // DB 불러오기 에러
+			console.error("SERVER :: DB Connection : All Database reading connection error");
+			console.error(allError);
+			res.end();
+			return allError
+		}
+
+		var domainList = [];
+		for (var i = 0; i < allResult.length; i++) {
+			if (domainList.indexOf(allResult[i].domain) < 0) {
+				domainList.push(allResult[i].domain);
+			}
+		}
+
+		// 의도 목록은 반드시 필요함 
+		var intentionList = [];
+		for (var i = 0; i < allResult.length; i++) {
+			if (intentionList.indexOf(allResult[i].intention) < 0 && allResult[i].domain == domain) { // 도메인이 일치하면서, 목록에 추가되지 않은 의도만 
+				intentionList.push(allResult[i].intention);
+			}
+		}
+
+		console.log("SERVER :: Number of Intention :: " + intentionList.length);
+
+		var statusList = [];
+		for (var i = 0; i < allResult.length; i ++) {
+			if (statusList.indexOf(allResult[i].chatbot_status) < 0 && allResult[i].intention == intention) {
+				statusList.push(allResult[i].chatbot_status);
+			}
+		}
+
+		res.render('home', {
+			domList: domainList,
+			nowDomain: domain,
+			intList: intentionList,
+			nowIntention: intention,
+			stList: statusList
 		});
 	});
 });
@@ -129,56 +179,14 @@ app.get('/mode/:domain/:intention/:status', function(req, res) {
 			return allError
 		}
 
-		var domainList = [];
-		for (var i = 0; i < allResult.length; i++) {
-			if (domainList.indexOf(allResult[i].domain) < -1) {
-				domainList.push(allResult[i].domain);
-			}
-		}
-
-		if (!domain) { // 도메인이 없을 경우
-			// 도메인 목록만 제시
-			res.render('home', {domList: domainList});
-		} else { // 도메인이 있는 경우
-			// 의도 목록은 반드시 필요함 
-			var intentionList = []
-			for (var i = 0; i < allResult.length; i++) {
-				if (intentionList.indexOf(allResult[i].intention) < -1 && allResult[i].domain == domain) { // 도메인이 일치하면서, 목록에 추가되지 않은 의도만 
-					intentionList.push(allResult[i].intention);
-				}
-			}
-
-			if (!intention) { //의도가 없는 경우 	
-				// 의도까지만 제시함 
-				res.render('home', {domList: domainList, nowDomain:domain, intList: intentionList});
-			} else { // 의도가 있는 경우 
-				var statusList = []
-				for (var i = 0; i < allResult.length; i++) {
-					if(statusList.indexOf(allResult[i].chatbot_status) < -1 && allResult[i].intention == intention) {
-						statusList.push(allResult[i].chatbot_status);
-					}
-				}
-
-				if (!status) { // 상태가 없는 경우 
-					res.render('home', {
-						domList: domainList,
-						nowDomain: domain,
-						intList: intentionList,
-						nowIntention: intention,
-						stList: statusList,
-					});
-				} else { // 상태가 있는 경우
-					res.render('home', {
-						domList: domainList,
-						nowDomain: domain,
-						intList: intentionList,
-						nowIntention: intention,
-						stList: statusList,
-						nowStatus: status
-					});
-				}
-			}
-		}
+		res.render('home', {
+			domList: domainList,
+			nowDomain: domain,
+			intList: intentionList,
+			nowIntention: intention,
+			stList: statusList,
+			nowStatus: status
+		});
 	});
 });
 
