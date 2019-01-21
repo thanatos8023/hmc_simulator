@@ -106,7 +106,7 @@ app.get('/mode/:domain', function (req, res) {
 
 		res.render('home', {
 			domList: domainList,
-			nowDomain, domain,
+			nowDomain: domain,
 			intList: intentionList
 		});
 	});
