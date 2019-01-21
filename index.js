@@ -65,6 +65,7 @@ app.get('/mode', function (req, res) {
 
 		var domainList = [];
 		for (var i = 0; i < allResult.length; i++) {
+			console.log("SERVER :: ROW " + i + " :: Domain : " + allResult[i].domain);
 			if (domainList.indexOf(allResult[i].domain) < -1) {
 				console.log("SERVER :: " + allResult[i].domain + " added to list.");
 				domainList.push(allResult[i].domain);
