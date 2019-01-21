@@ -72,7 +72,7 @@ app.get('/mode/:domain/:intention/:status', function(req, res) {
 
 		if (!domain) { // 도메인이 없을 경우
 			// 도메인 목록만 제시
-			res.render(home, {domList: domainList});
+			res.render('home', {domList: domainList});
 		} else { // 도메인이 있는 경우
 			// 의도 목록은 반드시 필요함 
 			var intentionList = []
@@ -84,7 +84,7 @@ app.get('/mode/:domain/:intention/:status', function(req, res) {
 
 			if (!intention) { //의도가 없는 경우 	
 				// 의도까지만 제시함 
-				res.render(home, {domList: domainList, nowDomain:domain, intList: intentionList});
+				res.render('home', {domList: domainList, nowDomain:domain, intList: intentionList});
 			} else { // 의도가 있는 경우 
 				var statusList = []
 				for (var i = 0; i < allResult.length; i++) {
@@ -94,7 +94,7 @@ app.get('/mode/:domain/:intention/:status', function(req, res) {
 				}
 
 				if (!status) { // 상태가 없는 경우 
-					res.render(home, {
+					res.render('home', {
 						domList: domainList,
 						nowDomain: domain,
 						intList: intentionList,
@@ -102,7 +102,7 @@ app.get('/mode/:domain/:intention/:status', function(req, res) {
 						stList: statusList,
 					});
 				} else { // 상태가 있는 경우
-					res.render(home, {
+					res.render('home', {
 						domList: domainList,
 						nowDomain: domain,
 						intList: intentionList,
