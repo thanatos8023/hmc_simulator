@@ -73,6 +73,45 @@ app.get('/mode', function (req, res) {
 	});
 });
 
+app.get('/mode/:domain', function (req, res) {
+	var domain = req.params.domain;
+	console.log('%%% Server log: /mode/' + domain + ' ROUTER');
+
+	// 기본적으로 도메인 목록은 무조건 전시해야함 
+	var sql = "SELECT * FROM tb_response_text";
+	conn_db.query(sql, function (allError, allResult, allBody) {
+		if (allError) { // DB 불러오기 에러
+			console.error("SERVER :: DB Connection : All Database reading connection error");
+			console.error(allError);
+			res.end();
+			return allError
+		}
+
+		var domainList = [];
+		for (var i = 0; i < allResult.length; i++) {
+			if (domainList.indexOf(allResult[i].domain) < 0) {
+				domainList.push(allResult[i].domain);
+			}
+		}
+
+		// 의도 목록은 반드시 필요함 
+		var intentionList = []
+		for (var i = 0; i < allResult.length; i++) {
+			if (intentionList.indexOf(allResult[i].intention) < 0 && allResult[i].domain == domain) { // 도메인이 일치하면서, 목록에 추가되지 않은 의도만 
+				intentionList.push(allResult[i].intention);
+			}
+		}
+
+		console.log("SERVER :: Number of Intention :: " + intentionList.length);
+
+		res.render('home', {
+			domList: domainList,
+			nowDomain, domain,
+			intList: intentionList
+		});
+	});
+});
+
 app.get('/mode/:domain/:intention/:status', function(req, res) {
 	console.log('%%% Server log: /mode ROUTER');
 

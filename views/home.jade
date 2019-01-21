@@ -19,3 +19,8 @@ html
 				each domain in domList
 					li
 						a(href='/mode/#{domain}')= domain
+						if nowDomain==domain
+							ul
+								each intention in intList
+									li
+										a(href='/mode/#{domain}/#{intention}')= intention
