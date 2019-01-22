@@ -33,13 +33,13 @@ app.listen(23705, function(){
 app.get('/view', function(req, res) {
 	var sql = "SELECT * FROM tb_monitoring"
 	conn_db.query(sql, function(err, monit_info, body) {
-		console.log("User ID: " + monit_info[0].user_id);
-		console.log("Car Type: " + monit_info[0].car_type);
-		console.log("Bluelink_status: " + monit_info[0].bluelink_status);
-		console.log("Intention: " + monit_info[0].intention);
-		console.log("User input: " + monit_info[0].user_input);
-		console.log("Response text: " + monit_info[0].response_text);
-
+		if (err) {
+			console.error("SERVER :: DB ERROR :: tb_monitoring selection error!");
+			console.error(err);
+			res.end();
+			return err
+		}
+		
 		res.render('view', {monit_info: monit_info});
 	});
 });
