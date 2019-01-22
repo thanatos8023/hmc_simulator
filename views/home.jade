@@ -70,10 +70,14 @@ html
 							td Object 2
 						tr
 							td
-							td= resType
-							td= resText
-							td= resObj1
-							td= resObj2
+							td
+								input(type="text" placeholder=resType)
+							td
+								input(type="textarea" placeholder=resText)
+							td
+								input(type="textarea" placeholder=resObj1)
+							td
+								input(type="textarea" placeholder=resObj2)
 		div
 			form(action='/updaterule' method='post')
 				div
@@ -88,6 +92,9 @@ html
 						if ruleList
 							tr
 								td
-								td= ruleList.morph1
-								td= ruleList.morph2
-								td= ruleList.morph3
+								td
+									input(type="textarea" placeholer=ruleList.morph1)
+								td
+									input(type="textarea" placeholer=ruleList.morph2)
+								td
+									input(type="textarea" placeholer=ruleList.morph3)
