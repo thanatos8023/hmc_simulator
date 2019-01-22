@@ -30,7 +30,7 @@ html
 													li
 														a(href='/mode/#{domain}/#{intention}/#{status}')= status
 		div
-			form(action='/deleteinput' method='post')
+			form(action='/delete/#{nowDomain}/#{nowIntention}/#{nowStatus}' method='post')
 				div
 					h2 Manage Input
 					input(type='submit' value='삭제')

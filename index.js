@@ -264,15 +264,25 @@ app.post('/input/:domain/:intention/:status', function(req, res) {
 
 
 // Delete Utterance in DB
-app.post('/delete', function(req, res) {
+app.post('/delete/:domain/:intention/:status', function(req, res) {
+	var domain = req.params.domain;
+	var intention = req.params.intention;
+	var status = req.params.status;
+
 	var checked_utt = req.body.checked_utt;
 
-	console.log("%%% Server log: /delete ROUTER");
+	console.log("%%% Server log: /deleteinput ROUTER");
 	console.log("Checked Utterance: " + checked_utt);
 
-	var sql = "DELETE FROM tb_utterance_manage WHERE user_input=?";
+	var sql = "DELETE FROM tb_user_input WHERE user_input=?";
 	conn_db.query(sql, [checked_utt], function(err, result, body) {
+		if (err) {
+			console.error("SERVER :: DB CONNECTION ERROR :: deletion error");
+			console.error(err);
+			res.end();
+			return err
+		}
 		console.log("%%% Server log: /delete ROUTER :: Successfully delete [" + checked_utt + "] in DB.");
-		res.redirect('/mode');
+		res.redirect('/mode/' + domain + '/' + intention + '/' + status);
 	});
 });
