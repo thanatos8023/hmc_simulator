@@ -56,7 +56,7 @@ app.post('/deleteview', function (req, res) {
 
 		console.log("SERVER :: tb_monitoring initialized");
 
-		res.redirect('view', {monit_info: delResult});
+		res.redirect('/view');
 	});
 });
 
