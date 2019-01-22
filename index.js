@@ -243,7 +243,7 @@ app.post('/input/:domain/:intention/:status', function(req, res) {
 	var intention = req.params.intention;
 	var status = req.params.status;
 
-	var new_userInput = req.body.newUserInput;
+	var newUserInput = req.body.newUserInput;
 
 	console.log("%%% Server log: /input ROUTER");
 	console.log("New Input: " + newUserInput);
