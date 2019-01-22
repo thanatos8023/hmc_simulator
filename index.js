@@ -321,9 +321,10 @@ app.post('/updateres/:domain/:intention/:status', function (req, res) {
 
 
 // Update rule
-app.post('/updaterule/:domain/:intention', function (req, res) {
+app.post('/updaterule/:domain/:intention/:status', function (req, res) {
 	var domain = req.params.domain;
 	var intention = req.params.intention;
+	var status = req.params.status;
 
 	var newMorph1 = req.body.newmorph1;
 	var newMorph2 = req.body.newmorph2;
@@ -334,8 +335,8 @@ app.post('/updaterule/:domain/:intention', function (req, res) {
 	console.log("New Morph 2: " + newMorph2);
 	console.log("New Morph 3: " + newMorph3);
 
-	var udtSQL = "UPDATE tb_rule SET  morph1 = ?, morph2 = ?, morph3 = ?"
-	conn_db.query(udtSQL, [newMorph1, newMorph2, newMorph3], function (udtErr, udtResult, udtField) {
+	var udtSQL = "UPDATE tb_rule SET  morph1 = ?, morph2 = ?, morph3 = ? WHERE domain = ? AND intention = ?"
+	conn_db.query(udtSQL, [newMorph1, newMorph2, newMorph3, domain, intention], function (udtErr, udtResult, udtField) {
 		if (udtErr) {
 			console.error("SERVER :: DB CONNECTION ERROR :: update error");
 			console.error(udtErr);
@@ -344,6 +345,6 @@ app.post('/updaterule/:domain/:intention', function (req, res) {
 		}
 
 		console.log("%%% Server log: /updaterule ROUTER :: Successfully Update [" + intention + "]  rule in DB.");
-		res.redirect('/mode/' + domain + '/' + intention);
+		res.redirect('/mode/' + domain + '/' + intention + '/' + status);
 	});
 });
