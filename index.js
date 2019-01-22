@@ -336,7 +336,7 @@ app.post('/updaterule/:domain/:intention', function (req, res) {
 
 	var udtSQL = "UPDATE tb_rule SET  morph1 = ?, morph2 = ?, morph3 = ?"
 	conn_db.query(udtSQL, [newMorph1, newMorph2, newMorph3], function (udtErr, udtResult, udtField) {
-		if (udtError) {
+		if (udtErr) {
 			console.error("SERVER :: DB CONNECTION ERROR :: update error");
 			console.error(udtErr);
 			res.end();
