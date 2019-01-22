@@ -44,7 +44,7 @@ html
 							each row in inputList
 								tr
 									td
-										input(type="checkbox" name="checked_utt" value=row.user_input)
+										button(type="submit" form="nameform" value=row.user_input) 삭제
 									td= row.domain
 									td= row.intention
 									td= row.user_input
