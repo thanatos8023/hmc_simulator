@@ -39,8 +39,8 @@ html
 							each row in inputList
 								tr
 									td
-										button(type="submit" form="deleteform" value=row.user_input) 삭제
-									td(name="uinput")= row.user_input
+										button(name="uinput" type="submit" form="deleteform" value=row.user_input) 삭제
+									td= row.user_input
 		div
 			form(action='/input/#{nowDomain}/#{nowIntention}/#{nowStatus}' method='post')
 				tr
