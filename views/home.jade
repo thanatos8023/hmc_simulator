@@ -49,6 +49,14 @@ html
 									td= row.intention
 									td= row.user_input
 		div
+			form(action='/input/#{nowDomain}/#{nowIntention}/#{nowStatus}' method='post')
+				tr
+					td
+						label User Input
+						input(type="text" name="newUserInput")
+					td
+						input(type="submit" value="추가")
+		div
 			form(action='/updateres' method='post')
 				div
 					h2 Manage Response
@@ -79,6 +87,7 @@ html
 							td Morph 3
 						if ruleList
 							tr
+								td
 								td= ruleList.morph1
 								td= ruleList.morph2
 								td= ruleList.morph3

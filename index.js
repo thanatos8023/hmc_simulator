@@ -238,22 +238,27 @@ app.get('/mode/:domain/:intention/:status', function(req, res) {
 });
 
 // Input Utterance in DB
-app.post('/input', function(req, res) {
-	var intention = req.body.selectedIntention;
-	var new_userInput = req.body.new_userInput;
-	var new_responseText = req.body.new_responseText;
-	var new_chatbotStatus = req.body.new_chatbotStatus;
+app.post('/input/:domain/:intention/:status', function(req, res) {
+	var domain = req.params.domain;
+	var intention = req.params.intention;
+	var status = req.params.status;
+
+	var new_userInput = req.body.newUserInput;
 
 	console.log("%%% Server log: /input ROUTER");
-	console.log("Intention: " + intention);
-	console.log("New Input: " + new_userInput);
-	console.log("New Response: " + new_responseText);
-	console.log("New Status: " + new_chatbotStatus);
+	console.log("New Input: " + newUserInput);
 
-	var sql = 'INSERT INTO tb_utterance_manage (intention, user_input, response_text, chatbot_status) VALUES(?, ?, ?, ?)';
-	conn_db.query(sql, [intention, new_userInput, new_responseText, new_chatbotStatus], function(err, result, fields){
+	var sql = 'INSERT INTO tb_user_input (domain, intention, user_input) VALUES(?, ?, ?)';
+	conn_db.query(sql, [domain, intention, newUserInput], function(inErr, inResult, inFields){
+		if (inErr) {
+			console.error("SERVER :: DB CONNECTION ERROR :: insertion error");
+			console.error(inErr);
+			res.end();
+			return inErr
+		}
+
 		console.log("%%% Server log: New information Successfully added in DB.");
-		res.redirect('/mode')
+		res.redirect('/mode/' + domain + '/' + intention + '/' + status);
 	});
 });
 
