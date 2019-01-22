@@ -28,4 +28,54 @@ html
 											ul
 												each status in stList
 													li
-														a(href='/mode/#{domain}/#{intention}/#status')= status
+														a(href='/mode/#{domain}/#{intention}/#{status}')= status
+		div
+			form(action='/deleteinput' method='post')
+				div
+					h2 Manage Input
+					input(type='submit' value='삭제')
+				div
+					table
+						th
+							td Domain
+							td Intention
+							td User Input
+						each row in inputList
+							tr
+								td
+									input(type="checkbox" name="checked_utt" value=row.user_input)
+								td= row.domain
+								td= row.intention
+								td= row.user_input
+		div
+			form(action='/updateres' method='post')
+				div
+					h2 Manage Response
+					input(type='submit' value='수정')
+				div
+					table
+						th
+							td Type
+							td Text
+							td Object 1
+							td Object 2
+						tr
+							td= resType
+							td= resText
+							td= resObj1
+							td= resObj2
+		div
+			form(action='/updaterule' method='post')
+				div
+					h2 Manage Rule
+					input(type='submit' value='수정')
+				div
+					table
+						th
+							td Morph 1
+							td Morph 2
+							td Morph 3
+						tr
+							td= ruleList.morph1
+							td= ruleList.morph2
+							td= ruleList.morph3
