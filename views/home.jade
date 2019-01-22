@@ -30,10 +30,9 @@ html
 													li
 														a(href='/mode/#{domain}/#{intention}/#{status}')= status
 		div
-			form(action='/delete/#{nowDomain}/#{nowIntention}/#{nowStatus}' method='post')
+			form(action='/delete/#{nowDomain}/#{nowIntention}/#{nowStatus}' method='post' id='deleteform')
 				div
 					h2 Manage Input
-					input(type='submit' value='삭제')
 				div
 					table
 						th
@@ -44,7 +43,7 @@ html
 							each row in inputList
 								tr
 									td
-										button(type="submit" form="nameform" value=row.user_input) 삭제
+										button(type="submit" form="deleteform" value=row.user_input) 삭제
 									td= row.domain
 									td= row.intention
 									td= row.user_input
