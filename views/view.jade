@@ -7,22 +7,25 @@ html
 	body
 		h1 Chatbot Simulator
 		h2 Monitoring
-		form(action='/deleteview' method='post')
-		input(type='submit' value='초기화')
-			table
-				th
-					td User ID
-					td Car Type
-					td Bluelink Status
-					td Intention
-					td User Input
-					td Response Text
-				each info in monit_info
-					tr
-						td
-						td= info.user_id
-						td= info.car_type
-						td= info.bluelink_status
-						td= info.intention
-						td= info.user_input
-						td= info.response_text
+		div
+			form(action='/deleteview' method='post')
+				div
+					input(type='submit' value='초기화')
+				div
+					table
+						th
+							td User ID
+							td Car Type
+							td Bluelink Status
+							td Intention
+							td User Input
+							td Response Text
+						each info in monit_info
+							tr
+								td
+								td= info.user_id
+								td= info.car_type
+								td= info.bluelink_status
+								td= info.intention
+								td= info.user_input
+								td= info.response_text
