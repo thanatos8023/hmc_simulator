@@ -76,7 +76,8 @@ html
 							td Morph 1
 							td Morph 2
 							td Morph 3
-						tr
-							td= ruleList.morph1
-							td= ruleList.morph2
-							td= ruleList.morph3
+						if ruleList
+							tr
+								td= ruleList.morph1
+								td= ruleList.morph2
+								td= ruleList.morph3
