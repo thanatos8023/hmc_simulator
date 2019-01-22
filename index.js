@@ -230,7 +230,7 @@ app.get('/mode/:domain/:intention/:status', function(req, res) {
 					resObj1: response_object1,
 					resObj2: response_object2,
 					inputList: inResult,
-					ruleList: ruleResult
+					ruleList: ruleResult[0]
 				});
 			});
 		});
