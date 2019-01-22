@@ -269,7 +269,7 @@ app.post('/delete/:domain/:intention/:status', function(req, res) {
 	var intention = req.params.intention;
 	var status = req.params.status;
 
-	var checked_utt = req.body.checked_utt;
+	var checked_utt = req.body.uinput;
 
 	console.log("%%% Server log: /deleteinput ROUTER");
 	console.log("Checked Utterance: " + checked_utt);

@@ -35,18 +35,12 @@ html
 					h2 Manage Input
 				div
 					table
-						th
-							td Domain
-							td Intention
-							td User Input
 						if inputList
 							each row in inputList
 								tr
 									td
 										button(type="submit" form="deleteform" value=row.user_input) 삭제
-									td= row.domain
-									td= row.intention
-									td= row.user_input
+									td(name="uinput")= row.user_input
 		div
 			form(action='/input/#{nowDomain}/#{nowIntention}/#{nowStatus}' method='post')
 				tr
