@@ -40,13 +40,14 @@ html
 							td Domain
 							td Intention
 							td User Input
-						each row in inputList
-							tr
-								td
-									input(type="checkbox" name="checked_utt" value=row.user_input)
-								td= row.domain
-								td= row.intention
-								td= row.user_input
+						if inputList
+							each row in inputList
+								tr
+									td
+										input(type="checkbox" name="checked_utt" value=row.user_input)
+									td= row.domain
+									td= row.intention
+									td= row.user_input
 		div
 			form(action='/updateres' method='post')
 				div
