@@ -44,6 +44,22 @@ app.get('/view', function(req, res) {
 	});
 });
 
+app.post('/deleteview', function (req, res) {
+	var sql = "DELETE FROM tb_monitoring";
+	conn_db.query(sql, function (delErr, delResult, delField) {
+		if (delErr) {
+			console.error("SERVER :: DB Connection : tb_monitoring deletion connection error");
+			console.error(delErr);
+			res.end();
+			return delErr
+		}
+
+		console.log("SERVER :: tb_monitoring initialized");
+
+		res.redirect('view', {monit_info: delResult});
+	});
+});
+
 // Modify page
 app.get('/mode', function (req, res) {
 	console.log('%%% Server log: /mode ROUTER');
