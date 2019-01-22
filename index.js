@@ -286,3 +286,64 @@ app.post('/delete/:domain/:intention/:status', function(req, res) {
 		res.redirect('/mode/' + domain + '/' + intention + '/' + status);
 	});
 });
+
+
+// Update response
+app.post('/updateres/:domain/:intention/:status', function (req, res) {
+	var domain = req.params.domain;
+	var intention = req.params.intention;
+	var status = req.params.status;
+
+	var newType = req.body.newtype;
+	var newText = req.body.newtext;
+	var newObj1 = req.body.newobj1;
+	var newObj2 = req.body.newobj2;
+
+	console.log("%%% Server log: /update ROUTER");
+	console.log("New Type: " + newType);
+	console.log("New Text: " + newText);
+	console.log("New Object1: " + newObj1);
+	console.log("New Object2: " + newObj2);
+
+	var udtSQL = "UPDATE tb_response_text SET response_type = ?, response_text = ?, response_object1 = ?, response_object2 = ? WHERE domain = ? AND intention = ? AND chatbot_status = ?";
+	conn_db.query(udtSQL, [newType, newText, newObj1, newObj2, domain, intention, status], function (udtErr, udtResult, udtField) {
+		if (udtErr) {
+			console.error("SERVER :: DB CONNECTION ERROR :: update error");
+			console.error(udtErr);
+			res.end();
+			return udtErr
+		}
+
+		console.log("%%% Server log: /updateres ROUTER :: Successfully Update [" + intention + "]  response in DB.");
+		res.redirect('/mode/' + domain + '/' + intention + '/' + status);
+	});
+});
+
+
+// Update rule
+app.post('/updaterule/:domain/:intention', function (req, res) {
+	var domain = req.params.domain;
+	var intention = req.params.intention;
+
+	var newMorph1 = req.body.newmorph1;
+	var newMorph2 = req.body.newmorph2;
+	var newMorph3 = req.body.newmorph3;
+
+	console.log("%%% Server log: /updaterule ROUTER");
+	console.log("New Morph 1: " + newMorph1);
+	console.log("New Morph 2: " + newMorph2);
+	console.log("New Morph 3: " + newMorph3);
+
+	var udtSQL = "UPDATE tb_rule SET  morph1 = ?, morph2 = ?, morph3 = ?"
+	conn_db.query(udtSQL, [newMorph1, newMorph2, newMorph3], function (udtErr, udtResult, udtField) {
+		if (udtError) {
+			console.error("SERVER :: DB CONNECTION ERROR :: update error");
+			console.error(udtErr);
+			res.end();
+			return udtErr
+		}
+
+		console.log("%%% Server log: /updaterule ROUTER :: Successfully Update [" + intention + "]  rule in DB.");
+		res.redirect('/mode/' + domain + '/' + intention);
+	});
+});

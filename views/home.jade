@@ -57,7 +57,7 @@ html
 					td
 						input(type="submit" value="추가")
 		div
-			form(action='/updateres' method='post')
+			form(action='/updateres/#{nowDomain}/#{nowIntention}/#{nowStatus}' method='post')
 				div
 					h2 Manage Response
 					input(type='submit' value='수정')
@@ -71,7 +71,7 @@ html
 						tr
 							td
 							td
-								input(type="text" name="newtype" placeholer='#{resType}')
+								textarea(name="newtype" rows="10")= resType
 							td
 								textarea(name="newtext" rows="10")= resText
 							td
@@ -79,7 +79,7 @@ html
 							td
 								textarea(name="newobj2" rows="10")= resObj2
 		div
-			form(action='/updaterule' method='post')
+			form(action='/updaterule/#{nowDomain}/#{nowIntention}/#{nowStatus}' method='post')
 				div
 					h2 Manage Rule
 					input(type='submit' value='수정')
