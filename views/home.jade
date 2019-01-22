@@ -71,13 +71,13 @@ html
 						tr
 							td
 							td
-								input(type="text" placeholder=resType)
+								input(type="text") resType
 							td
-								input(type="textarea" placeholder=resText)
+								textarea(rows="10") resText
 							td
-								input(type="textarea" placeholder=resObj1)
+								textarea(rows="10") resObj1
 							td
-								input(type="textarea" placeholder=resObj2)
+								textarea(rows="10") resObj2
 		div
 			form(action='/updaterule' method='post')
 				div
@@ -93,8 +93,8 @@ html
 							tr
 								td
 								td
-									input(type="textarea" placeholer=ruleList.morph1)
+									textarea(rows="5") ruleList.morph1
 								td
-									input(type="textarea" placeholer=ruleList.morph2)
+									textarea(rows="5") ruleList.morph2
 								td
-									input(type="textarea" placeholer=ruleList.morph3)
+									textarea(rows="5") ruleList.morph3
