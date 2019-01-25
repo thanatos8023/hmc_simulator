@@ -24,7 +24,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.set('views', './views');
 app.set('view engine', 'jade');
 
-app.use(express.static('/public/'));
+app.use(express.static('public/'));
 
 // Location
 app.listen(23705, function(){
