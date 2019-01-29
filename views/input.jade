@@ -49,14 +49,15 @@ html
 										li
 											input(type="checkbox" id=row.user_input)
 											label(for=row.user_input)= row.user_input
-							div.paging
-								a(href="/input/#{nowDomain}/#{nowIntention}/#{nowStatus}/#{nowPage - 1}")
-									i.icon-prev
-										span.hidden 이전으로
-								each page in pages
-									if page == nowPage
-										a(href="/input/#{nowDomain}/#{nowIntention}/#{nowStatus}/#{n}" class="on")= page
-									else
-										a(href="/input/#{nowDomain}/#{nowIntention}/#{nowStatus}/#{page}")= n
+							if pages
+								div.paging
+									a(href="/input/#{nowDomain}/#{nowIntention}/#{nowStatus}/#{nowPage - 1}")
+										i.icon-prev
+											span.hidden 이전으로
+									each page in pages
+										if page == nowPage
+											a(href="/input/#{nowDomain}/#{nowIntention}/#{nowStatus}/#{n}" class="on")= page
+										else
+											a(href="/input/#{nowDomain}/#{nowIntention}/#{nowStatus}/#{page}")= n
 		script(src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js")
 		script(src="js/func.js")
