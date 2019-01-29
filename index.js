@@ -87,7 +87,7 @@ app.get('/mode', function (req, res) {
 			}
 		}
 
-		res.render('home', {domList: domainList});
+		res.render('input', {domList: domainList});
 	});
 });
 

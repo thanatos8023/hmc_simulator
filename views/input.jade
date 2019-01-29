@@ -1,0 +1,62 @@
+doctype html
+html
+	head
+		meta(charset='utf-8')
+		title User utterance and response viewer
+		link(href="https://fonts.googleapis.com/css?family=Nanum+Gothic|Raleway" rel="stylesheet")
+		link(rel="stylesheet" href="css/reset.css")
+		link(rel="stylesheet" href="css/style.css")
+	body
+		div#wrap
+			div.wrap-left
+				div._title
+					h1 Chatbot Simulator
+				div.sub
+					ul
+						each domain in domList
+							li
+							a(href='/mode/#{domain}')= domain
+							if nowDomain==domain
+								ul
+									each intention in intList
+										li
+											a(href='/mode/#{domain}/#{intention}')= intention
+											if nowIntention==intention
+												ul
+													each status in stList
+														li
+															a(href='/mode/#{domain}/#{intention}/#{status}')= status
+			div.wrap-right
+				div.gnb
+					a(href="/mode/#{nowDomain}/#{nowIntention}/#{nowStatus}") Manage Input
+					a(href="/response/#{nowDomain}/#{nowIntention}/#{nowStatus}") Manage Response
+					a(href="/rule/#{nowDomain}/#{nowIntention}/#{nowStatus}") Manage Rule
+				form(action='/delete/#{nowDomain}/#{nowIntention}/#{nowStatus}' method='post' id='deleteform')
+				form(action='/input/#{nowDomain}/#{nowIntention}/#{nowStatus}' method='post' id='insertform')
+					div._contents
+						div.box
+							div.user-input
+								label(for="la01") User Input
+								input(type="text" id="la01")
+								button(type="button" class="button blue")
+									i.icon-plus 추가
+								button(type="button" class="button gray")
+									i.icon-trash 삭제
+							div.user-list
+								if inputList
+									ul
+									each row in inputList
+										li
+											input(type="checkbox" id=row.user_input)
+											label(for=row.user_input)= row.user_input
+							div.paging
+								a(href="/input/#{nowDomain}/#{nowIntention}/#{nowStatus}/#{nowPage - 1}")
+									i.icon-prev
+										span.hidden 이전으로
+								each page in pages
+									if page == nowPage
+										a(href="/input/#{nowDomain}/#{nowIntention}/#{nowStatus}/#{n}" class="on")= page
+									else
+										a(href="/input/#{nowDomain}/#{nowIntention}/#{nowStatus}/#{page}")= n
+		script(src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js")
+		script(src="js/func.js")
