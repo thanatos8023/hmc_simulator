@@ -45,7 +45,9 @@ app.get('/view', function(req, res) {
 		console.log("rows: ", monit_info.length);
 		console.log("sample: ", monit_info[0]);
 		
-		res.render('view', {monit_info: monit_info});
+		var monit = monit_info;
+
+		res.render('view', {monit_info: monit});
 	});
 });
 
