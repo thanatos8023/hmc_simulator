@@ -122,7 +122,7 @@ app.get('/mode/:domain', function (req, res) {
 
 		console.log("SERVER :: Number of Intention :: " + intentionList.length);
 
-		res.render('home', {
+		res.render('input', {
 			domList: domainList,
 			nowDomain: domain,
 			intList: intentionList
@@ -168,7 +168,7 @@ app.get('/mode/:domain/:intention', function (req, res) {
 			}
 		}
 
-		res.render('home', {
+		res.render('input', {
 			domList: domainList,
 			nowDomain: domain,
 			intList: intentionList,
@@ -236,7 +236,7 @@ app.get('/mode/:domain/:intention/:status', function(req, res) {
 					return ruleError
 				}
 
-				res.render('home', {
+				res.render('input', {
 					domList: domainList,
 					nowDomain: domain,
 					intList: intentionList,
