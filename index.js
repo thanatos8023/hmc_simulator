@@ -41,6 +41,9 @@ app.get('/view', function(req, res) {
 			res.end();
 			return err
 		}
+
+		console.log("rows: ", monit_info.length);
+		console.log("sample: ", monit_info[0]);
 		
 		res.render('view', {monit_info: monit_info});
 	});
