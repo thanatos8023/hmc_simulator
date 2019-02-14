@@ -424,7 +424,8 @@ app.get('/mode/:domain/:intention/:status', function(req, res) {
 			resObj2: response_object2,
 			inputList: inResult,
 			ruleList: ruleResult[0]
-		});			
+		});
+	});
 });
 
 // Input Utterance in DB
