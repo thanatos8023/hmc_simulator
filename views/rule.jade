@@ -31,7 +31,7 @@ html
 					a(href="/mode/#{nowDomain}/#{nowIntention}/#{nowStatus}") Manage Input
 					a(href="/response/#{nowDomain}/#{nowIntention}/#{nowStatus}") Manage Response
 					a(href="/rule/#{nowDomain}/#{nowIntention}/#{nowStatus}") Manage Rule
-				form(action='/updateres/#{nowDomain}/#{nowIntention}/#{nowStatus}' method='post' id='updateresform')
+				form(action='/updaterule/#{nowDomain}/#{nowIntention}/#{nowStatus}' method='post' id='updateruleform')
 					div._contents
 						div.box
 							div(class="_top text-right")
@@ -43,19 +43,16 @@ html
 									caption manage Response table
 									thead
 										tr
-											th(scope="col") Type
-											th(scope="col") Text
-											th(scope="col") Object 1
-											th(scope="col") Object 2
+											th(scope="col") Morph 1
+											th(scope="col") Morph 2
+											th(scope="col") Morph 3
 									tbody
 										tr
 											td
-												textarea(name="resType", id="resType")= resType
+												textarea(name="morph1", id="morph1")= morph1
 											td
-												textarea(name="resText", id="resText")= resText
+												textarea(name="morph2", id="morph2")= morph2
 											td
-												textarea(name="resObj1", id="resObj1")= resObj1
-											td
-												textarea(name="resObj2", id="resObj2")= resObj2
+												textarea(name="morph3", id="morph3")= morph3
 		script(src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js")
 		script(src="js/func.js")
