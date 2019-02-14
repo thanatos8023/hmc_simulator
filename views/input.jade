@@ -14,21 +14,31 @@ html
 				div.sub
 					ul
 						each domain in domList
-							li
-							a(href='/mode/#{domain}')= domain
 							if nowDomain==domain
+								li.active
+									a(href='/mode/#{domain}')= domain
 								ul
 									each intention in intList
-										li
-											a(href='/mode/#{domain}/#{intention}')= intention
-											if nowIntention==intention
-												ul
-													each status in stList
+										if nowIntention==intention
+											li.active
+												a(href='/mode/#{domain}/#{intention}')= intention
+											ul
+												each status in stList
+													if nowStatus==status
+														li.active
+															a(href='/mode/#{domain}/#{intention}/#{status}')= status
+													else		
 														li
 															a(href='/mode/#{domain}/#{intention}/#{status}')= status
+										else
+											li.active
+												a(href='/mode/#{domain}/#{intention}')= intention
+							else
+								li
+									a(href='/mode/#{domain}')= domain
 			div.wrap-right
 				div.gnb
-					a(href="/mode/#{nowDomain}/#{nowIntention}/#{nowStatus}") Manage Input
+					a(href="/mode/#{nowDomain}/#{nowIntention}/#{nowStatus}" class="on") Manage Input
 					a(href="/response/#{nowDomain}/#{nowIntention}/#{nowStatus}") Manage Response
 					a(href="/rule/#{nowDomain}/#{nowIntention}/#{nowStatus}") Manage Rule
 				form(action='/delete/#{nowDomain}/#{nowIntention}/#{nowStatus}' method='post' id='deleteform')
