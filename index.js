@@ -323,7 +323,7 @@ app.get('/response/:domain', function (req, res) {
 	});
 });
 
-app.get('/mode/:domain/:intention', function (req, res) {
+app.get('/response/:domain/:intention', function (req, res) {
 	var domain = req.params.domain;
 	var intention = req.params.intention;
 
@@ -371,7 +371,7 @@ app.get('/mode/:domain/:intention', function (req, res) {
 	});
 });
 
-app.get('/mode/:domain/:intention/:status', function(req, res) {
+app.get('/response/:domain/:intention/:status', function(req, res) {
 	console.log('%%% Server log: /mode ROUTER');
 
 	var domain = req.params.domain;
