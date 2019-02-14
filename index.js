@@ -421,9 +421,7 @@ app.get('/response/:domain/:intention/:status', function(req, res) {
 			resType: response_type,
 			resText: response_text,
 			resObj1: response_object1,
-			resObj2: response_object2,
-			inputList: inResult,
-			ruleList: ruleResult[0]
+			resObj2: response_object2
 		});
 	});
 });
