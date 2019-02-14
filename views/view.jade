@@ -34,13 +34,13 @@ html
 									th Response Text
 							tbody
 								if idxs
-									each i in idxs
+									- for (var i = 0; i < ids.length; i++) {var id = ids[i]; var type = types[i]; var status = status[i]; var intention = intentions[i]; var input = inputs[i]; var response = responses[i];}
 										tr
-											td= ids[i]
-											td= types[i]
-											td= status[i]
-											td= intentions[i]
-											td= inputs[i]
-											td= responses[i]
+											th= id
+											th= type
+											th= status
+											th= intention
+											th= input
+											th= response
 		script(src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js")
 		script(src="js/func.js")
