@@ -50,8 +50,8 @@ app.get('/view', function(req, res) {
 			monit.push(monit_info[i]);
 		}
 
-		res.send(monit)
-		//res.render('view', {monit_info: monit});
+		//res.send(monit)
+		res.render('view', {monit_information: monit});
 	});
 });
 
