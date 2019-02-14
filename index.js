@@ -45,13 +45,33 @@ app.get('/view', function(req, res) {
 		console.log("rows: ", monit_info.length);
 		console.log("sample: ", monit_info[0]);
 		
-		var monit = [];
+		var ids = [];
+		var types = [];
+		var status = [];
+		var intentions = [];
+		var inputs = [];
+		var responses = [];
+		var idxs = [];
 		for (var i = 0; i < monit_info.length; i++) {
-			monit.push(monit_info[i]);
+			ids.push(monit_info[i].user_id);
+			types.push(monit_info[i].car_type);
+			status.push(monit_info[i].bluelink_status);
+			intentions.push(monit_info[i].intention);
+			inputs.push(monit_info[i].user_input);
+			responses.push(monit_info[i].response_text);
+			idxs.push(i);
 		}
 
-		//res.send(monit)
-		res.render('view', {monit_information: monit});
+
+		res.render('view', {
+			ids: ids,
+			types: types,
+			status: status,
+			intentions: intentions,
+			inputs: inputs,
+			responses: responses,
+			idxs: idxs
+		});
 	});
 });
 

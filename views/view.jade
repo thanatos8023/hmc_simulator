@@ -33,14 +33,14 @@ html
 									th User Input
 									th Response Text
 							tbody
-								if monit_info
-									each info in monit_information
+								if idxs
+									each i in idxs
 										tr
-											td= info.user_id
-											td= info.car_type
-											td= info.bluelink_status
-											td= info.intention
-											td= info.user_input
-											td= info.response_text
+											td= ids[i]
+											td= types[i]
+											td= status[i]
+											td= intentions[i]
+											td= inputs[i]
+											td= responses[i]
 		script(src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js")
 		script(src="js/func.js")
