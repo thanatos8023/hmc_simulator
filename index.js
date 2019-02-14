@@ -576,7 +576,7 @@ app.get('/rule/:domain/:intention/:status', function(req, res) {
 
 		// 정보 출력
 		ruleSQL = "SELECT * FROM tb_rule WHERE WHERE domain = ? AND intention = ?";
-		connection.query(ruleSQL, [domain, intention], function (ruleErr, ruleResult, ruleNext) {
+		conn_db.query(ruleSQL, [domain, intention], function (ruleErr, ruleResult, ruleNext) {
 			if (ruleErr) { // DB 불러오기 에러
 				console.error("SERVER :: DB Connection : Rule Database reading connection error");
 				console.error(ruleErr);
