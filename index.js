@@ -62,7 +62,7 @@ app.post('/deleteview', function (req, res) {
 	});
 });
 
-// Modify page
+// Modify Input page
 app.get('/mode', function (req, res) {
 	console.log('%%% Server log: /mode ROUTER');
 
@@ -255,6 +255,178 @@ app.get('/mode/:domain/:intention/:status', function(req, res) {
 	});
 });
 
+// Modify Output page
+app.get('/response', function (req, res) {
+	console.log('%%% Server log: /response ROUTER');
+
+	var domain = req.params.domain;
+	var intention = req.params.intention;
+	var status = req.params.status;
+
+	// 기본적으로 도메인 목록은 무조건 전시해야함 
+	var sql = "SELECT * FROM tb_response_text";
+	conn_db.query(sql, function (allError, allResult, allBody) {
+		if (allError) { // DB 불러오기 에러
+			console.error("SERVER :: DB Connection : All Database reading connection error");
+			console.error(allError);
+			res.end();
+			return allError
+		}
+
+		var domainList = [];
+		for (var i = 0; i < allResult.length; i++) {
+			if (domainList.indexOf(allResult[i].domain) < 0) {
+				domainList.push(allResult[i].domain);
+			}
+		}
+
+		res.render('output', {domList: domainList});
+	});
+});
+
+app.get('/response/:domain', function (req, res) {
+	var domain = req.params.domain;
+	console.log('%%% Server log: /mode/' + domain + ' ROUTER');
+
+	// 기본적으로 도메인 목록은 무조건 전시해야함 
+	var sql = "SELECT * FROM tb_response_text";
+	conn_db.query(sql, function (allError, allResult, allBody) {
+		if (allError) { // DB 불러오기 에러
+			console.error("SERVER :: DB Connection : All Database reading connection error");
+			console.error(allError);
+			res.end();
+			return allError
+		}
+
+		var domainList = [];
+		for (var i = 0; i < allResult.length; i++) {
+			if (domainList.indexOf(allResult[i].domain) < 0) {
+				domainList.push(allResult[i].domain);
+			}
+		}
+
+		// 의도 목록은 반드시 필요함 
+		var intentionList = [];
+		for (var i = 0; i < allResult.length; i++) {
+			if (intentionList.indexOf(allResult[i].intention) < 0 && allResult[i].domain == domain) { // 도메인이 일치하면서, 목록에 추가되지 않은 의도만 
+				intentionList.push(allResult[i].intention);
+			}
+		}
+
+		console.log("SERVER :: Number of Intention :: " + intentionList.length);
+
+		res.render('output', {
+			domList: domainList,
+			nowDomain: domain,
+			intList: intentionList
+		});
+	});
+});
+
+app.get('/mode/:domain/:intention', function (req, res) {
+	var domain = req.params.domain;
+	var intention = req.params.intention;
+
+	console.log('%%% Server log: /mode/' + domain + '/' + intention + ' ROUTER');
+
+	// 기본적으로 도메인 목록은 무조건 전시해야함 
+	var sql = "SELECT * FROM tb_response_text";
+	conn_db.query(sql, function (allError, allResult, allBody) {
+		if (allError) { // DB 불러오기 에러
+			console.error("SERVER :: DB Connection : All Database reading connection error");
+			console.error(allError);
+			res.end();
+			return allError
+		}
+
+		var domainList = [];
+		for (var i = 0; i < allResult.length; i++) {
+			if (domainList.indexOf(allResult[i].domain) < 0) {
+				domainList.push(allResult[i].domain);
+			}
+		}
+
+		// 의도 목록은 반드시 필요함 
+		var intentionList = [];
+		for (var i = 0; i < allResult.length; i++) {
+			if (intentionList.indexOf(allResult[i].intention) < 0 && allResult[i].domain == domain) { // 도메인이 일치하면서, 목록에 추가되지 않은 의도만 
+				intentionList.push(allResult[i].intention);
+			}
+		}
+
+		var statusList = [];
+		for (var i = 0; i < allResult.length; i ++) {
+			if (statusList.indexOf(allResult[i].chatbot_status) < 0 && allResult[i].intention == intention) {
+				statusList.push(allResult[i].chatbot_status);
+			}
+		}
+
+		res.render('output', {
+			domList: domainList,
+			nowDomain: domain,
+			intList: intentionList,
+			nowIntention: intention,
+			stList: statusList
+		});
+	});
+});
+
+app.get('/mode/:domain/:intention/:status', function(req, res) {
+	console.log('%%% Server log: /mode ROUTER');
+
+	var domain = req.params.domain;
+	var intention = req.params.intention;
+	var status = req.params.status;
+
+	// 기본적으로 도메인 목록은 무조건 전시해야함 
+	var sql = "SELECT * FROM tb_response_text";
+	conn_db.query(sql, function (allError, allResult, allBody) {
+		if (allError) { // DB 불러오기 에러
+			console.error("SERVER :: DB Connection : All Database reading connection error");
+			console.error(allError);
+			res.end();
+			return allError
+		}
+
+		var domainList = [];
+		var intentionList = [];
+		var statusList = [];
+		for (var i = 0; i < allResult.length; i++) {
+			if (domainList.indexOf(allResult[i].domain) < 0) {
+				domainList.push(allResult[i].domain);
+			}
+			if (intentionList.indexOf(allResult[i].intention) < 0 && allResult[i].domain == domain) { // 도메인이 일치하면서, 목록에 추가되지 않은 의도만 
+				intentionList.push(allResult[i].intention);
+			}
+			if (statusList.indexOf(allResult[i].chatbot_status) < 0 && allResult[i].intention == intention) {
+				statusList.push(allResult[i].chatbot_status);
+			}
+
+			if (allResult[i].domain == domain && allResult[i].intention == intention && allResult[i].chatbot_status == status) {
+				var response_type = allResult[i].response_type;
+				var response_text = allResult[i].response_text;
+				var response_object1 = allResult[i].response_object1;
+				var response_object2 = allResult[i].response_object2;
+			}
+		}
+
+		// 정보 출력
+		res.render('output', {
+			domList: domainList,
+			nowDomain: domain,
+			intList: intentionList,
+			nowIntention: intention,
+			stList: statusList,
+			nowStatus: status,
+			resType: response_type,
+			resText: response_text,
+			resObj1: response_object1,
+			resObj2: response_object2,
+			inputList: inResult,
+			ruleList: ruleResult[0]
+		});			
+});
+
 // Input Utterance in DB
 app.post('/input/:domain/:intention/:status', function(req, res) {
 	var domain = req.params.domain;
@@ -333,7 +505,7 @@ app.post('/updateres/:domain/:intention/:status', function (req, res) {
 		}
 
 		console.log("%%% Server log: /updateres ROUTER :: Successfully Update [" + intention + "]  response in DB.");
-		res.redirect('/mode/' + domain + '/' + intention + '/' + status);
+		res.redirect('/response/' + domain + '/' + intention + '/' + status);
 	});
 });
 
@@ -363,6 +535,6 @@ app.post('/updaterule/:domain/:intention/:status', function (req, res) {
 		}
 
 		console.log("%%% Server log: /updaterule ROUTER :: Successfully Update [" + intention + "]  rule in DB.");
-		res.redirect('/mode/' + domain + '/' + intention + '/' + status);
+		res.redirect('/rule/' + domain + '/' + intention + '/' + status);
 	});
 });
