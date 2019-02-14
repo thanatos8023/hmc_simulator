@@ -45,7 +45,7 @@ app.get('/view', function(req, res) {
 		console.log("rows: ", monit_info.length);
 		console.log("sample: ", monit_info[0]);
 		
-		var monit = monit_info;
+		var monit = JSON.parse(JSON.stringify(monit_info));
 
 		res.render('view', {monit_info: monit});
 	});
