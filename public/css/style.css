@@ -297,7 +297,7 @@ i[class^="icon-"]{
 
 }
 .basic-table table{
-	table-layout:fixed;
+	table-layout:auto;
 	width:100%;
 }
 
@@ -318,7 +318,6 @@ i[class^="icon-"]{
 .basic-table table tbody td{
 	border-left:1px solid #d6d6d6;
 	font-family: 'Nanum Gothic', sans-serif;
-	height:532px;
 }
 .basic-table table tbody td:first-child{
 	border-left:0;
