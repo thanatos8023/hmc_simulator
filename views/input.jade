@@ -43,7 +43,7 @@ html
 					a(href="/rule/#{nowDomain}/#{nowIntention}/#{nowStatus}") Manage Rule
 				div._contents
 					div.box
-						form(action='/delete/#{nowDomain}/#{nowIntention}/#{nowStatus}' method='post' id='deleteform')
+						form(action='/input/#{nowDomain}/#{nowIntention}/#{nowStatus}' method='post' id='insertform')
 							div.user-input
 								label(for="la01") User Input
 								input(type="text" id="la01" name="newUserInput")
@@ -51,7 +51,7 @@ html
 									i.icon-plus 
 								button(type="submit" class="button gray" value="la01" form="deleteform") 삭제
 									i.icon-trash 
-						form(action='/input/#{nowDomain}/#{nowIntention}/#{nowStatus}' method='post' id='insertform')
+						form(action='/delete/#{nowDomain}/#{nowIntention}/#{nowStatus}' method='post' id='deleteform')
 							div.user-list
 								if inputList
 									ul
