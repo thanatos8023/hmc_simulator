@@ -293,9 +293,18 @@ i[class^="icon-"]{
 	vertical-align:middle;
 }
 .basic-table{
+	display: block;
+	width: 100%;
+	border-collapse: collapse;
 	border-top:1px solid #d6d6d6;
-
 }
+.basic-table th { border: 1px solid #000; }
+.basic-table td { border: 1px solid #000; }
+.basic-table tbody {
+	display: block;
+	overflow: auto;
+}
+
 .basic-table table{
 	table-layout:auto;
 	width:100%;
@@ -315,14 +324,6 @@ i[class^="icon-"]{
 .basic-table table thead th:nth-child{
 	border-left:0;
 }
-
-.basic-table table tbody {
-	display: block;
-    width: 100%;
-    border-collapse: collapse;
-    border: 1px solid #000;
-}
-
 .basic-table table tbody td{
 	border-left:1px solid #d6d6d6;
 	font-family: 'Nanum Gothic', sans-serif;
