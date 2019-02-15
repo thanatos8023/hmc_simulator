@@ -295,7 +295,7 @@ i[class^="icon-"]{
 .basic-table{
 	display: block;
 	width: 1000px;
-	height: 600px;
+	height: 550px;
 	border-collapse: collapse;
 	border-top:1px solid #d6d6d6;
 	overflow: auto;
@@ -320,6 +320,14 @@ i[class^="icon-"]{
 .basic-table table thead th:nth-child{
 	border-left:0;
 }
+
+.basic-table table tbody tr {
+	border-bottom: 1px solid #d6d6d6;
+}
+.basic-table table tbody tr:nth-child{
+	border-bottom: 0;
+}
+
 .basic-table table tbody td{
 	border-left:1px solid #d6d6d6;
 	font-family: 'Nanum Gothic', sans-serif;
