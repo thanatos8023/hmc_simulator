@@ -708,11 +708,11 @@ app.post('/updateres/:domain/:intention/:status', function (req, res) {
 	var intention = req.params.intention;
 	var status = req.params.status;
 
-	console.log(req.body);
-	var newType = req.body.newtype;
-	var newText = req.body.newtext;
-	var newObj1 = req.body.newobj1;
-	var newObj2 = req.body.newobj2;
+	//console.log(req.body);
+	var newType = req.body.newType;
+	var newText = req.body.newText;
+	var newObj1 = req.body.newObj1;
+	var newObj2 = req.body.newObj2;
 
 	console.log("%%% Server log: /update ROUTER");
 	console.log("New Type: " + newType);
@@ -741,7 +741,7 @@ app.post('/updaterule/:domain/:intention/:status', function (req, res) {
 	var intention = req.params.intention;
 	var status = req.params.status;
 
-	console.log(req.body);
+	//console.log(req.body);
 	var newMorph1 = req.body.newmorph1;
 	var newMorph2 = req.body.newmorph2;
 	var newMorph3 = req.body.newmorph3;
