@@ -294,8 +294,8 @@ i[class^="icon-"]{
 }
 .basic-table{
 	display: block;
-	width: 500px;
-	height: 300px;
+	width: 1000px;
+	height: 600px;
 	border-collapse: collapse;
 	border-top:1px solid #d6d6d6;
 	overflow: auto;
