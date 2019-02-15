@@ -298,7 +298,7 @@ i[class^="icon-"]{
 }
 .basic-table table{
 	table-layout:auto;
-	width:100%;
+	width:300px;
 }
 
 .basic-table table thead th{
