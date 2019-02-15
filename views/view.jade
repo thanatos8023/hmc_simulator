@@ -36,12 +36,12 @@ html
 								if idxs
 									-	for (var i = 0; i < ids.length; i++) {
 										tr
-											th(border=1)= ids[i]
-											th(border=1)= types[i]
-											th(border=1)= status[i]
-											th(border=1)= intentions[i]
-											th(border=1)= inputs[i]
-											th(border=1)= responses[i]
+											th= ids[i]
+											th= types[i]
+											th= status[i]
+											th= intentions[i]
+											th= inputs[i]
+											th= responses[i]
 									-	}
 		script(src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js")
 		script(src="js/func.js")
