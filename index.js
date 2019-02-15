@@ -661,7 +661,6 @@ app.post('/delete/:domain/:intention/:status', function(req, res) {
 	var intention = req.params.intention;
 	var status = req.params.status;
 
-	console.log(req.body);
 	var checked_utt = req.body.checked_utt;
 
 	console.log("%%% Server log: /deleteinput ROUTER");
@@ -709,6 +708,7 @@ app.post('/updateres/:domain/:intention/:status', function (req, res) {
 	var intention = req.params.intention;
 	var status = req.params.status;
 
+	console.log(req.body);
 	var newType = req.body.newtype;
 	var newText = req.body.newtext;
 	var newObj1 = req.body.newobj1;
@@ -741,6 +741,7 @@ app.post('/updaterule/:domain/:intention/:status', function (req, res) {
 	var intention = req.params.intention;
 	var status = req.params.status;
 
+	console.log(req.body);
 	var newMorph1 = req.body.newmorph1;
 	var newMorph2 = req.body.newmorph2;
 	var newMorph3 = req.body.newmorph3;

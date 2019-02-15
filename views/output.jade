@@ -35,7 +35,7 @@ html
 					div._contents
 						div.box
 							div(class="_top text-right")
-								button(type="button" class="button mint") 수정
+								button(type="submit" class="button mint" form="updateresform") 수정
 									i.icon-modify
 									
 							div(class="basic-table type02")
@@ -50,12 +50,12 @@ html
 									tbody
 										tr
 											td
-												textarea(name="resType", id="resType")= resType
+												textarea(name="newType", id="newType")= resType
 											td
-												textarea(name="resText", id="resText")= resText
+												textarea(name="newText", id="newText")= resText
 											td
-												textarea(name="resObj1", id="resObj1")= resObj1
+												textarea(name="newObj1", id="newObj1")= resObj1
 											td
-												textarea(name="resObj2", id="resObj2")= resObj2
+												textarea(name="newObj2", id="newObj2")= resObj2
 		script(src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js")
 		script(src="js/func.js")
