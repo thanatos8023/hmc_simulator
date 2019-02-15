@@ -298,7 +298,7 @@ i[class^="icon-"]{
 }
 .basic-table table{
 	table-layout:auto;
-	width:180px;
+	width:100%;
 }
 
 .basic-table table thead th{
@@ -312,14 +312,14 @@ i[class^="icon-"]{
 	height:40px;
 }
 
-.basic-table table thead th:first-child{
+.basic-table table thead th:nth-child{
 	border-left:0;
 }
 .basic-table table tbody td{
 	border-left:1px solid #d6d6d6;
 	font-family: 'Nanum Gothic', sans-serif;
 }
-.basic-table table tbody td:first-child{
+.basic-table table tbody td:nth-child{
 	border-left:0;
 }
 .button{
