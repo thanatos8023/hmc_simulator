@@ -213,6 +213,8 @@ body {
 
 .user-list {
 	overflow: auto;
+	width: 729px;
+	height: 594px;
 }
 
 .user-list ul{
