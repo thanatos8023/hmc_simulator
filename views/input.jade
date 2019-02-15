@@ -57,7 +57,8 @@ html
 									ul
 									each row in inputList
 										li
-											input(type="checkbox" name="checked_utt" value=row.user_input)= row.user_input
+											input(type="checkbox" name="checked_utt" value=row.user_input)
+											row.user_input
 											br
 							if pages
 								div.paging
