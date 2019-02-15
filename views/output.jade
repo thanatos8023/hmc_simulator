@@ -15,17 +15,17 @@ html
 					ul
 						each domain in domList
 							li
-							a(href='/reponse/#{domain}')= domain
+							a(href='/response/#{domain}')= domain
 							if nowDomain==domain
 								ul
 									each intention in intList
 										li
-											a(href='/reponse/#{domain}/#{intention}')= intention
+											a(href='/response/#{domain}/#{intention}')= intention
 											if nowIntention==intention
 												ul
 													each status in stList
 														li
-															a(href='/reponse/#{domain}/#{intention}/#{status}')= status
+															a(href='/response/#{domain}/#{intention}/#{status}')= status
 			div.wrap-right
 				div.gnb
 					a(href="/mode/#{nowDomain}/#{nowIntention}/#{nowStatus}") Manage Input
