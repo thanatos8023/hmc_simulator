@@ -211,8 +211,11 @@ body {
 	margin-right:5px;
 }
 
-.user-list ul{
+.user-list {
 	overflow: auto;
+}
+
+.user-list ul{
 	border:1px solid #eee;
 }
 .user-list li{
