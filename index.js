@@ -62,7 +62,7 @@ app.get('/view', function(req, res) {
 			idxs.push(i);
 		}
 
-		console.log(status);
+		//console.log(status);
 
 		res.render('view', {
 			ids: ids,
