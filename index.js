@@ -681,8 +681,12 @@ app.post('/delete/:domain/:intention/:status', function(req, res) {
 		});	
 	}
 	else {
+		for (var i = 0; i < checked_utt.length; i++) {
+			checked_utt[i] = `'${checked_utt}'`;
+		}
 		var utts = checked_utt.join();
 		utts = `(${utts})`;
+		
 		var sql = "DELETE FROM tb_user_input WHERE user_input in " + utts;
 		conn_db.query(sql, function(err, result, body) {
 			if (err) {
