@@ -579,6 +579,11 @@ app.get('/rule/:domain/:intention/:status', function(req, res) {
 	var intention = req.params.intention;
 	var status = req.params.status;
 
+	if (domain === "System") {
+		res.redirect('/rule');
+		return 200;
+	}
+
 	// 기본적으로 도메인 목록은 무조건 전시해야함 
 	var sql = "SELECT * FROM tb_response_text";
 	conn_db.query(sql, function (allError, allResult, allBody) {
