@@ -667,17 +667,38 @@ app.post('/delete/:domain/:intention/:status', function(req, res) {
 	console.log("%%% Server log: /deleteinput ROUTER");
 	console.log("Checked Utterance: " + checked_utt);
 
-	var sql = "DELETE FROM tb_user_input WHERE user_input=?";
-	conn_db.query(sql, [checked_utt], function(err, result, body) {
-		if (err) {
-			console.error("SERVER :: DB CONNECTION ERROR :: deletion error");
-			console.error(err);
-			res.end();
-			return err
+	if (typeof(checked_utt) === typeof('string')) {
+		var sql = "DELETE FROM tb_user_input WHERE user_input=?";
+		conn_db.query(sql, [checked_utt], function(err, result, body) {
+			if (err) {
+				console.error("SERVER :: DB CONNECTION ERROR :: deletion error");
+				console.error(err);
+				res.end();
+				return err
+			}
+			console.log("%%% Server log: /delete ROUTER :: Successfully delete [" + checked_utt + "] in DB.");
+			res.redirect('/mode/' + domain + '/' + intention + '/' + status);
+		});	
+	}
+	else {
+		var utts = '(';
+		for (var i = 0; i < checked_utt.length; i++) {
+			utts = utts + "'" + checked_utt[i] + "',";
 		}
-		console.log("%%% Server log: /delete ROUTER :: Successfully delete [" + checked_utt + "] in DB.");
-		res.redirect('/mode/' + domain + '/' + intention + '/' + status);
-	});
+		utts = utts + ')';
+		var sql = "DELETE FROM tb_user_input WHERE user_input in " + utts;
+		conn_db.query(sql, function(err, result, body) {
+			if (err) {
+				console.error("SERVER :: DB CONNECTION ERROR :: deletion error");
+				console.error(err);
+				res.end();
+				return err
+			}
+			console.log("%%% Server log: /delete ROUTER :: Successfully delete [" + checked_utt + "] in DB.");
+			res.redirect('/mode/' + domain + '/' + intention + '/' + status);
+		});	
+	}
+	
 });
 
 
