@@ -315,6 +315,14 @@ i[class^="icon-"]{
 .basic-table table thead th:nth-child{
 	border-left:0;
 }
+
+.basic-table table tbody {
+	display: block;
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid #000;
+}
+
 .basic-table table tbody td{
 	border-left:1px solid #d6d6d6;
 	font-family: 'Nanum Gothic', sans-serif;
