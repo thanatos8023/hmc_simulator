@@ -310,27 +310,6 @@ i[class^="icon-"]{
 	width:100%;
 }
 
-.basic-table table thead th{
-	background-color:#f5f5f5;
-	border-left:1px solid #d6d6d6;
-	border-bottom:1px solid #d6d6d6;
-	color: #666;
-	font-size:16px;
-	text-align:center;
-	vertical-align:middle;
-	height:40px;
-}
-
-.basic-table table thead th:nth-child{
-	border-left:0;
-}
-.basic-table table tbody td{
-	border-left:1px solid #d6d6d6;
-	font-family: 'Nanum Gothic', sans-serif;
-}
-.basic-table table tbody td:nth-child{
-	border-left:0;
-}
 .button{
 	font-family: 'Nanum Gothic', sans-serif;
 	font-weight:bold;
