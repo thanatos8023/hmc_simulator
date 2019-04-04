@@ -8,7 +8,7 @@ const mysql = require('mysql');
 const conn_db = mysql.createConnection({
   host     : 'localhost',
   user     : 'hmc',
-  password : 'aleldjwps',
+  password : 'mediazen',
   database : 'hmc_chatbot'
 });
 
@@ -27,8 +27,8 @@ app.set('view engine', 'jade');
 app.use(express.static('public/'));
 
 // Location
-app.listen(23705, function(){
-	console.log('Connected, 23705 port!');
+app.listen(3102, function(){
+	console.log('Connected, 3102 port!');
 });
 
 // Monitoring page
