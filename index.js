@@ -610,7 +610,7 @@ app.get('/rule/:domain/:intention/:status', function(req, res) {
 		}
 
 		// 정보 출력
-		ruleSQL = "select * from TB_RULE where domain = ? and intention = ?";
+		ruleSQL = "select * from tb_rule where domain = ? and intention = ?";
 		conn_db.query(ruleSQL, [domain, intention], function (ruleErr, ruleResult, ruleNext) {
 			if (ruleErr) { // DB 불러오기 에러
 				console.error("SERVER :: DB Connection : Rule Database reading connection error");
